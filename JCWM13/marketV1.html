@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var hargaOreo = 8000
+    var hargaChitato = 7900
+    var hargaPonari = 7500
+    alert('Selamat datang diToko Serba')
+    alert(`Produk dagangan : \n1. Oreo = Rp. ${hargaOreo.toLocaleString()}\n2. Chitato = Rp. ${hargaChitato.toLocaleString()}\n3. Ponari Sweat = Rp. ${hargaPonari.toLocaleString()}`)
+
+    var beliOreo = parseInt(prompt("Beli Oreo berapa ?"))
+    var beliChitato = parseInt(prompt("Beli Chitato berapa ?"))
+    var beliPonari = parseInt(prompt("Beli Ponari Sweat berapa ?"))
+
+    let bayarOreo = hargaOreo * beliOreo
+    let bayarChitato = hargaChitato * beliChitato
+    let bayarPonari = hargaPonari * beliPonari
+
+    alert(`Total belanja anda adalah : \n1. Oreo Rp. ${hargaOreo} x ${beliOreo} = Rp. ${bayarOreo.toLocaleString()}\n2. Chitato Rp. ${hargaChitato} x ${beliChitato} = Rp. ${bayarChitato.toLocaleString()}\n3. Ponari Sweat Rp. ${hargaPonari} x ${beliPonari} = Rp. ${bayarPonari.toLocaleString()}`)
+</script>
+
+</html>

@@ -18,6 +18,9 @@
 <script>
     //get date
     var date = new Date()
+    alert("Yesterday = " + (date.getDate() - 1) + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear())
+    alert("Today = " + date.getDate() + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear())
+    alert("Tomorrow = " + (date.getDate() + 1) + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear())
     document.getElementById("yesterday").innerHTML = (date.getDate() - 1) + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear()
     document.getElementById("today").innerHTML = date.getDate() + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear()
     document.getElementById("tomorrow").innerHTML = (date.getDate() + 1) + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear()
