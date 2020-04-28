@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+</head>
+
+<body>
+    <h3>Tanggal Hari Kemarin 🕵️‍♀️</h3>
+    <h1 id='yesterday'></h1>
+    <h3>Tanggal Hari Ini 🕵️‍♀️</h3>
+    <h1 id='today'></h1>
+    <h3>Tanggal Hari Besok 🕵️‍♀️</h3>
+    <h1 id='tomorrow'></h1>
+</body>
+<script>
+    //get date
+    var date = new Date()
+    document.getElementById("yesterday").innerHTML = (date.getDate() - 1) + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear()
+    document.getElementById("today").innerHTML = date.getDate() + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear()
+    document.getElementById("tomorrow").innerHTML = (date.getDate() + 1) + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear()
+</script>
+
+</html>

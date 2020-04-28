@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Stock</title>
+</head>
+
+<body>
+    <h1>Data Stock Produk</h1>
+    <h3>Stock baju = </h3>
+    <h3 id="baju"></h3>
+    <h3>Stock celana = </h3>
+    <h3 id="celana"></h3>
+</body>
+<script>
+    var baju = 10
+    var celana = 20
+    alert(`Stock produk saat ini :\n 1. Baju = ${baju}\n 2. Celana = ${celana}`)
+    let tambahBaju = prompt(`Tambah stock baju = `)
+    let tambahCelana = prompt(`Tambah stock celana = `)
+
+    var stockBaju = baju + parseInt(tambahBaju)
+    var stockCelana = celana + parseInt(tambahCelana)
+
+    alert(`Stock produk terbaru :\n 1. Baju = ${stockBaju}\n 2. Celana = ${stockCelana} `)
+    document.getElementById("baju").innerHTML=stockBaju
+    document.getElementById("celana").innerHTML=stockCelana
+</script>
+</html>
