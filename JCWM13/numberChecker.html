@@ -1,0 +1,37 @@
+<script>
+    var loop = true
+    while (loop) { //looping, selama variable loop sama dengan true maka akan terus berulang
+        var menu = parseInt(prompt("Pilih :\n1. Deteksi Angka\n2. Deteksi Ganjil Genap"))
+        if (menu == 1) {
+            var val = parseInt(prompt("Masukkan value :"))
+            if (isNaN(val)) { //isNaN (isNotaNumber) : fungsi untuk mengetahui tipe value bukan angka atau tidak ==> true/false 
+                alert("Input bukan angka")
+            } else if (val < 0) {
+                alert("Angka negatif")
+            } else {
+                alert("Angka positif")
+            }
+            var conf = confirm("Mau lanjut ?")
+            if (!conf) { // jika variable conf sama dengan false maka isi variable loop menjadi false, dan akan menutup pop-up menu
+                loop = false
+            }
+        } else if (menu == 2) {
+            var val = parseInt(prompt("Masukkan value :"))
+            if (val % 2 == 0) {
+                alert(`Nilai ${val} adalah bilangan GENAP`)
+            } else {
+                alert(`Nilai ${val} adalah bilangan GANJIL`)
+            }
+            var conf = confirm("Mau lanjut ?")
+            if (!conf) {
+                loop = false
+            }
+        } else {
+            alert("Menu tidak ada")
+            var conf = confirm("Mau lanjut ?")
+            if (!conf) {
+                loop = false
+            }
+        }
+    }
+</script>
