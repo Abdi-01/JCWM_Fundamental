@@ -1,0 +1,23 @@
+<script>
+    let kata = prompt("Masukkan kalimat")
+    function vowel() {
+        let vokal = ''
+        for (let i = 0; i < kata.length; i++) {
+            //mengecek apakah huruf pada index i berupa huruf vokal
+            if (kata.charAt(i).toLowerCase() == 'a' || kata.charAt(i).toLowerCase() == 'i' || kata.charAt(i).toLowerCase() == 'u' || kata.charAt(i).toLowerCase() == 'e' || kata.charAt(i).toLowerCase() == 'o') {
+                //mengecek varible prnampung huruf vokal apakah meiliki huruf vokal yg terdeteksi
+                if (!vokal.includes(kata.charAt(i).toLowerCase())) {//tanda ! menandakan reverse value awalnya true ==> false
+                    //jika huruf vokal yg terdeteksi tidak ada pada variable penampung, maka huruf tersebut ditambahkan
+                    vokal += kata.charAt(i).toLowerCase()
+                }
+            }
+        }
+        return alert(`
+        Kalimat = ${kata}
+        Huruf vokal = ${vokal}
+        Jumlah jenis huruf vokal = ${vokal.length} 
+        `)
+    }
+
+    vowel()
+</script>
