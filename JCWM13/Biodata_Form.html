@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        table,
+        th,
+        td,
+        tr {
+            border: 2px solid blue;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h3>Daftar Siswa Purwadhika</h3>
+        <table style="size: 200px; width: 300px;">
+            <tr>
+                <td>
+                    <form id='inform' style="padding: 10px;">
+                        <input type="text" id="nama" placeholder="Masukkan nama"><br>
+                        <br><input type="number" id="usia" placeholder="Usia"><br>
+                        <h4>Gender <input type="radio" name="Gender" value="Pria" id="pria">Pria</input>
+                            <input type="radio" name="Gender" value="Wanita" id="wanita">Wanita</input></h4>
+                        <input type="text" id="pekerjaan" placeholder="Pekerjaan"><br>
+                        <br><input type="button" value="Submit" onclick="cek()"><br>
+                        <br><input type="button" value="Nama" onclick="">
+                        <input type="button" value="Umur" onclick="">
+                        <input type="button" value="Pekerjaan" onclick="">
+                        <input type="button" value="Gender" onclick="">
+                    </form>
+                </td>
+            </tr>
+        </table><br>
+        <table name="htabel" style="width: 300px;">
+            <thead>
+                <th>Nama</th>
+                <th>Usia</th>
+                <th>Gender</th>
+                <th>Pekerjaan</th>
+            </thead>
+            <tbody id='tHasil'>
+
+            </tbody>
+        </table>
+    </center>
+    <script>
+        var HTML = ``
+        var data = []
+        class ambilData {
+            constructor(nama, usia, gender, pekerjaan) {
+                this.nama = nama,
+                    this.usia = usia,
+                    this.gender = gender,
+                    this.pekerjaan = pekerjaan
+            }
+        }
+        function tambahData(nama, usia, gender, pekerjaan) {
+            var dataBaru = new ambilData(nama, usia, gender, pekerjaan)
+            return data.push(dataBaru)
+        }
+        function cetakData() {
+            var form = document.getElementById("inform");
+            console.log(form.elements['Gender'])
+            console.log(document.getElementsByName('Gender').values)
+            var fnama = document.getElementById('inform').elements[0].value
+            var fusia = document.getElementById('inform').elements[1].value
+            var fgender = form.elements['Gender'].value
+            var fpekerjaan = document.getElementById('inform').elements[4].value
+            tambahData(fnama, fusia, fgender, fpekerjaan)
+            for (i = 0; i < data.length; i++) {
+                HTML += `<tr>
+                    <td>${data[data.length-1].nama}</td>
+                    <td>${data[data.length-1].usia}</td>
+                    <td>${data[data.length-1].gender}</td>
+                    <td>${data[data.length-1].pekerjaan}</td>
+                </tr>`
+                break;
+            }
+            console.log(document.getElementById("tHasil").innerHTML)
+            document.getElementById("tHasil").innerHTML = HTML;
+            // document.getElementById("tHasil").insertAdjacentHTML('afterend',HTML);
+            document.getElementById('nama').value = ''
+            document.getElementById('usia').value = ''
+            document.getElementById('pekerjaan').value = ''
+            document.getElementById('pria').checked = false;
+            document.getElementById('wanita').checked = false;
+        }
+        function cek(){
+                var form = document.getElementById("inform");
+                var nama = document.getElementById('inform').elements[0].value
+                var usia = document.getElementById('inform').elements[1].value
+                var pekerjaan = document.getElementById('inform').elements[2].value
+                var gender = form.elements["Gender"].value
+                if(usia == '' || nama == '' || pekerjaan == '' || gender == ''){
+                    alert('Please Dont Leave Field Empty')
+                }else{
+                    return cetakData()
+                }
+            }    
+    </script>
+</body>
+
+</html>
