@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice 02 : Calendar</title>
+    <style>
+        table,
+        tr,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            height: 50px;
+            width: 50px;
+            text-align: center;
+        }
+
+        th {
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset style="width: 340px;">
+        <legend>Input Bulan dan Tahun</legend>
+        <form>
+            <label>Bulan</label>
+            <input type="number" id="bulan" max="12" min="1"/><br/>
+            <label>Tahun</label>
+            <input type="number" id="tahun" /><br/>
+            <input type="button" onclick="generateCal()" value="Generate Calender"/>
+        </form>
+    </fieldset>
+    <table>
+        <thead>
+            <tr>
+                <th>SU</th>
+                <th>MO</th>
+                <th>TU</th>
+                <th>WE</th>
+                <th>TH</th>
+                <th>FR</th>
+                <th>ST</th>
+            </tr>
+        </thead>
+        <tbody id="tbCal"></tbody>
+    </table>
+</body>
+<script>
+
+    function generateCal() {
+        let bulan = document.getElementById("bulan").value
+        let tahun = document.getElementById("tahun").value
+        let date = new Date(tahun, bulan - 1)
+        let startDay = date.getDay() + 1
+        let totalDays = new Date(tahun, bulan, 0).getDate()
+
+        let htmlElement = '', col = 1, day = 1
+        for (let i = 0; i < 6; i++) {//untuk membuat row
+            htmlElement += '<tr>'
+            for (let j = 0; j < 7; j++) {//untuk membuat col
+                if (col >= startDay && day <= totalDays) {
+                    htmlElement += `<td style="background-color:${day === new Date().getDate() && (bulan-1) == new Date().getMonth()? 'red' : null};">${day}</td>`
+                    day++
+                } else {
+                    htmlElement += '<td></td>'
+                }
+                col++
+            }
+            htmlElement += '</tr>'
+        }
+        // console.log(result)
+        document.getElementById('tbCal').innerHTML = htmlElement
+    }
+
+    // create element
+
+</script>
+
+</html>
