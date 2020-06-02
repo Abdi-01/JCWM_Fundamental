@@ -32,10 +32,10 @@
         <legend>Input Bulan dan Tahun</legend>
         <form>
             <label>Bulan</label>
-            <input type="number" id="bulan" max="12" min="1"/><br/>
+            <input type="number" id="bulan" max="12" min="1" /><br />
             <label>Tahun</label>
-            <input type="number" id="tahun" /><br/>
-            <input type="button" onclick="generateCal()" value="Generate Calender"/>
+            <input type="number" id="tahun" /><br />
+            <input type="button" onclick="generateCal()" value="Generate Calender" />
         </form>
     </fieldset>
     <table>
@@ -52,8 +52,49 @@
         </thead>
         <tbody id="tbCal"></tbody>
     </table>
+    <div>
+        <fieldset style="width: 340px;padding: 5px;">
+            <legend>To Do List</legend>
+            <table style="margin-top:10px ;">
+                <thead>
+                    <th style="width: 60px;">Waktu</th>
+                    <th style="width: 80px;">Kegiatan</th>
+                    <th style="width: 130px;">Detail</th>
+                    <th style="width: 70px;">Setting</th>
+                </thead>
+                <tbody id="tbKegiatan">
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
 </body>
 <script>
+
+    var data = []
+    var htmlToDo = ''
+
+    class kegiatan {
+        constructor(_waktu, _kegiatan, _detail) {
+            this.waktu = _waktu,
+                this.kegiatan = _kegiatan,
+                this.detail = _detail
+        }
+    }
+
+    function addTodo(day, month, year) {
+        var Waktu = `${day}/${month}/${year}`
+        var Kegiatan = prompt('Masukkan Kegiatan :')
+        var Detail = prompt('Masukkan Detail')
+
+        data.push(new kegiatan(Waktu, Kegiatan, Detail))
+        console.log(data)
+        printKegiatan()
+    }
+
+    function remove(index) {
+        data.splice(index, 1)
+        printKegiatan()
+    }
 
     function generateCal() {
         let bulan = document.getElementById("bulan").value
@@ -67,7 +108,8 @@
             htmlElement += '<tr>'
             for (let j = 0; j < 7; j++) {//untuk membuat col
                 if (col >= startDay && day <= totalDays) {
-                    htmlElement += `<td style="background-color:${day === new Date().getDate() && (bulan-1) == new Date().getMonth()? 'red' : null};">${day}</td>`
+                    console.log('bulan', bulan)
+                    htmlElement += `<td style="background-color:${day === new Date().getDate() && (bulan - 1) == new Date().getMonth() ? 'red' : null};" onclick="addTodo(${day},${bulan},${tahun})">${day}</td>`
                     day++
                 } else {
                     htmlElement += '<td></td>'
@@ -78,10 +120,25 @@
         }
         // console.log(result)
         document.getElementById('tbCal').innerHTML = htmlElement
+        printKegiatan()
     }
 
-    // create element
-
+    function printKegiatan() {
+        let bulan = document.getElementById("bulan").value
+        htmlToDo = ''
+        data.forEach((item, index) => {
+            if (item.waktu.split("/")[1] == bulan) {
+                htmlToDo += `
+            <tr>
+               <td>${item.waktu}</td>
+                <td>${item.kegiatan}</td>
+                <td>${item.detail}</td>
+                <td><input type="button" value="Edit" onclick="edit(${index})" /><input type="button" value="Hapus" onclick="remove(${index})" /></td>
+            </tr>`
+            }
+        })
+        document.getElementById('tbKegiatan').innerHTML = htmlToDo
+    }
 </script>
 
 </html>
