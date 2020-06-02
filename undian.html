@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="background-color: aqua;text-align: center;">
+        <h2>Choose Soulmate</h2>
+        <form>
+            <input type="text" id="inName" placeholder="Input Name" />
+            <input type="button" value="Add" onclick="addName()" />
+        </form>
+        <h3 id="randomName">Wait..</h3>
+        <input type="button" onclick="start()" value="Start Random" />
+        <input type="button" onclick="stop()" value="Stop Random" />
+        <div style="display: flex;justify-content: center;">
+            <table>
+                <thead>
+                    <th>No</th>
+                    <th>Name</th>
+                </thead>
+                <tbody id="tbName">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    var list = ["Adi", "Bima", "Arya", "Kevin"], run, htmlElement = ''
+
+    function addName() {
+        list.push(document.getElementById("inName").value)
+        printList()
+    }
+
+    function start() {
+        run = setInterval(random, 10)
+    }
+
+    function stop() {
+        clearInterval(run)
+    }
+
+    function random() {
+        var choose = Math.random() * (list.length - 1)
+        document.getElementById("randomName").innerHTML = list[Math.round(choose)]
+    }
+
+    function printList() {
+        htmlElement = ''
+        list.forEach((item, index) => {
+            htmlElement += `
+            <tr>
+                <th>${index + 1}</th>
+                <th>${item}</th>
+            </tr>
+            `
+        })
+        document.getElementById("tbName").innerHTML = htmlElement
+    }
+
+    printList()
+</script>
+
+</html>
