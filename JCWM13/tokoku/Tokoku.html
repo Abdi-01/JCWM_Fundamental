@@ -100,7 +100,21 @@
                         <!-- <label style="margin-right: 8.4px;">Password </label> -->
                         <input type="password" id="password" placeholder="Password" class="input-style" /><br />
                         <input type="button" class="button-style" value="Masuk" onclick="login()" />
-                        <input type="button" class="button-style" value="Daftar" />
+                        <input type="button" class="button-style" value="Daftar" onclick="regisForm('toform')" />
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+        <div class="container" id="regis-page">
+            <div class="form-login">
+                <img src="tokoku_logo.png" width="70vw" height="70vh" style="margin:10px 0 5px 4%;"><br />
+                <fieldset>
+                    <legend style="font-weight: bold;">Daftar</legend>
+                    <form style="padding: 10px;text-align: center;">
+                        <input type="text" id="newusername" placeholder="Username" class="input-style" />
+                        <input type="password" id="newpassword" placeholder="Password" class="input-style" /><br />
+                        <input type="button" class="button-style" value="<<Back" onclick="regisForm()" />
+                        <input type="button" class="button-style" value="Daftar" onclick="regis()" />
                     </form>
                 </fieldset>
             </div>
@@ -110,7 +124,10 @@
                 style="cursor: pointer;;margin-top: -3px;border: none;padding: 6px;width: 80px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">Logout</button>
             <h3 style="margin: 5px 0px 10px 0px;">Tokoku</h3>
             <fieldset id="addForm">
-
+            </fieldset>
+            <fieldset>
+                <legend style="font-weight: bold;">Search Product</legend>
+                <input type="text" id="filter" /> <input type="button" onclick="filterPro()" value="Cari" /><input type="button" onclick="filterClear()" value="Reset"/>
             </fieldset>
             <table style="margin-top:10px ;">
                 <thead>
@@ -122,7 +139,7 @@
                     <th style="width: 200px;">Price</th>
                     <th style="width: 120px;">Setting</th>
                 </thead>
-                <tbody id="tbKegiatan">
+                <tbody id="tbProduct">
                 </tbody>
                 <tfoot>
 
