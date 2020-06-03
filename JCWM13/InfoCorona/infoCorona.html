@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table,
+        th,
+        td,
+        tr {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        fieldset,label,h2 {
+            display: inline;
+        }
+    </style>
+    <title>Info Corona</title>
+</head>
+
+<body>
+    <fieldset>
+        <legend>Warga</legend>
+        <table>
+            <thead>
+                <th>Antrian</th>
+                <th>Nama</th>
+                <th>Asal</th>
+                <th>Tujuan</th>
+                <th>Action</th>
+            </thead>
+            <tbody id="tb_warga">
+
+            </tbody>
+            <tr>
+                <th></th>
+                <th><input type="text" placeholder="Nama" id="nama" /></th>
+                <th><input type="text" placeholder="Asal" id="asal" /></th>
+                <th><input type="text" placeholder="Tujuan" id="tujuan" /></th>
+                <th><input type="button" value="Antri" onclick="addWarga()" /></th>
+            </tr>
+        </table>
+    </fieldset>
+    <div>
+        <fieldset>
+            <legend>Rapid Test</legend>
+            <table>
+                <thead>
+                    <th>Antrian</th>
+                    <th>Nama</th>
+                    <th>Asal</th>
+                    <th>Tujuan</th>
+                    <th>Action</th>
+                </thead>
+                <tbody id="tb_rapid">
+
+                </tbody>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>Pasien Positif</legend>
+            <table>
+                <thead>
+                    <th>Antrian</th>
+                    <th>Nama</th>
+                    <th>Asal</th>
+                    <th>Tujuan</th>
+                    <th>Action</th>
+                </thead>
+                <tbody id="tb_positif">
+
+                </tbody>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>Pasien Negatif</legend>
+            <table>
+                <thead>
+                    <th>Antrian</th>
+                    <th>Nama</th>
+                    <th>Asal</th>
+                    <th>Tujuan</th>
+                    <th>Action</th>
+                </thead>
+                <tbody id="tb_negatif">
+
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</body>
+<script src="infoCorona.js"></script>
+
+</html>
