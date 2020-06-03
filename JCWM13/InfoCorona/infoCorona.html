@@ -14,7 +14,9 @@
             padding: 10px;
         }
 
-        fieldset,label,h2 {
+        fieldset,
+        label,
+        h2 {
             display: inline;
         }
     </style>
@@ -59,6 +61,10 @@
 
                 </tbody>
             </table>
+            <label>Alat Rapid Test: </label>
+            <h2 id="alat_rapid"></h2>
+            <button onclick="restockAlat()">Restock</button>
+            <button onclick="returnAlat()">Return</button>
         </fieldset>
         <fieldset>
             <legend>Pasien Positif</legend>
@@ -91,6 +97,21 @@
             </table>
         </fieldset>
     </div>
+    <fieldset>
+        <legend>Report Data</legend>
+        <label>Jumlah Total Warga Desa BSD : </label>
+        <h2 id="jmlh_warga"></h2>
+        <label>Jumlah Warga Rapid Test : </label>
+        <h2 id="jmlh_rapid"></h2>
+        <label>Jumlah Alat Rapid Test : </label>
+        <h2 id="jmlh_alat_rapid"></h2>
+        <label>Jumlah Positif : </label>
+        <h2 id="jmlh_positif"></h2>
+        <label>Jumlah Negatif : </label>
+        <h2 id="jmlh_negatif"></h2>
+        <label>Jumlah Meninggal : </label>
+        <h2 id="jmlh_meninggal"></h2>
+    </fieldset>
 </body>
 <script src="infoCorona.js"></script>
 
