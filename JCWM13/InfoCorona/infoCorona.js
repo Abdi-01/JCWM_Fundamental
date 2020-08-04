@@ -17,7 +17,7 @@ let dbwarga = [
         dari: "Semarang",
         tujuan: "Jakarta"
     }
-], dbrapid = [], dbpositif = [], dbnegatif = [], dbmeninggal = [], htmlElement = '', countWarga = dbwarga.length, stockRapid = 20, ambilAlat = 0
+], dbrapid = [], dbpositif = [], dbnegatif = [], dbmeninggal = [], htmlElement = '', countWarga = dbwarga.length
 
 printWarga()
 function addWarga() {
@@ -40,18 +40,14 @@ function rapidTest(index) {
 function toPositif(index) {
     dbpositif.push(dbrapid[index])
     dbrapid.splice(index, 1)
-    ambilAlat -= 1
     printRapid()
     printPositif()
-    reportData()
 }
 function toNegatif(index) {
     dbnegatif.push(dbrapid[index])
-    ambilAlat -= 1
     dbrapid.splice(index, 1)
     printRapid()
     printNegatif()
-    reportData()
 }
 
 function toSembuh(index) {
@@ -74,34 +70,6 @@ function toMeninggal(index) {
     printPositif()
 }
 
-function restockAlat() {
-    let reStock = parseInt(prompt("Jumlah alat yang diminta ?"))
-    if (reStock > stockRapid) {
-        alert('🚧 Stock Gudang Terbatas')
-    } else {
-        ambilAlat += reStock
-        stockRapid -= reStock
-    }
-    stockRapid <= 1 ? stockRapid += parseInt(prompt('Restock Alat di Gudang : ')) : null
-    reportData()
-}
-
-function returnAlat() {
-    stockRapid += ambilAlat
-    ambilAlat = 0
-    reportData()
-}
-
-function reportData() {
-    document.getElementById("jmlh_warga").textContent = countWarga
-    document.getElementById("jmlh_rapid").textContent = dbrapid.length
-    document.getElementById("alat_rapid").textContent = ambilAlat
-    document.getElementById("jmlh_alat_rapid").textContent = stockRapid
-    document.getElementById("jmlh_positif").textContent = dbpositif.length
-    document.getElementById("jmlh_negatif").textContent = dbnegatif.length
-    document.getElementById("jmlh_meninggal").textContent = dbmeninggal.length
-}
-
 //print table
 function printWarga() {
     htmlElement = ''
@@ -117,7 +85,7 @@ function printWarga() {
         `
     })
     document.getElementById("tb_warga").innerHTML = htmlElement
-    reportData()
+   
 }
 
 
@@ -139,7 +107,6 @@ function printRapid() {
         `
     })
     document.getElementById("tb_rapid").innerHTML = htmlElement
-    // reportData()
 }
 
 function printPositif() {
@@ -160,7 +127,6 @@ function printPositif() {
         `
     })
     document.getElementById("tb_positif").innerHTML = htmlElement
-    // reportData()
 }
 
 function printNegatif() {
@@ -177,5 +143,4 @@ function printNegatif() {
         `
     })
     document.getElementById("tb_negatif").innerHTML = htmlElement
-    // reportData()
 }

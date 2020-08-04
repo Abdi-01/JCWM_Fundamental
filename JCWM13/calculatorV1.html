@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <h1>Calculator</h1>
+    <div>
+        <h2 style="display: inline;">Angka pertama =</h2>
+        <h2 id="angka1" style="display: inline;"></h2>
+    </div>
+    <div>
+        <h2 style="display: inline;">Angka kedua =</h2>
+        <h2 id="angka2" style="display: inline;"></h2>
+    </div>
+    <h2>Hasil penjumlahan</h2>
+    <h2 id="penjumlahan"></h2>
+    <h2>Hasil pengurangan</h2>
+    <h2 id="pengurangan"></h2>
+    <h2>Hasil perkalian</h2>
+    <h2 id="perkalian"></h2>
+    <h2>Hasil pembagian</h2>
+    <h2 id="pembagian"></h2>
+</body>
+<script>
+    alert("Operator Matematika : ")
+    var angka1 = parseInt(prompt('Masukkan angka pertama : '))
+    var angka2 = parseInt(prompt('Masukkan angka kedua : '))
+    var penjumlahan = angka1 + angka2
+    var pengurangan = angka1 - angka2
+    var perkalian = angka1 * angka2
+    var pembagian = angka1 / angka2
+    document.getElementById("angka1").innerHTML = angka1
+    document.getElementById("angka2").innerHTML = angka2
+    document.getElementById("penjumlahan").innerHTML = penjumlahan
+    document.getElementById("pengurangan").innerHTML = pengurangan
+    document.getElementById("perkalian").innerHTML = perkalian
+    document.getElementById("pembagian").innerHTML = pembagian
+    // alert("Hasil penjumlahan = " + (parseInt(angka1) + Number(angka2)))
+</script>
+
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market</title>
+</head>
+
+<body></body>
+<script>
+    //Deklarasi harga produk
+    let produk = [
+        {
+            nama: 'Oreo',
+            harga: 8000,
+            stock: 20
+        },
+        {
+            nama: 'Chitato',
+            harga: 7000,
+            stock: 25
+        },
+        {
+            nama: 'Pocari',
+            harga: 6500,
+            stock: 15
+        }
+    ]
+
+    let user = [
+        {
+            nama: 'Admin',
+            role: 'admin'
+        },
+        {
+            nama: 'Budi',
+            role: "user"
+        },
+        {
+            nama: 'Andi',
+            role: "user"
+        }
+    ]
+
+    class inProduct {
+        constructor(nama, harga, stock) {
+            this.nama = nama,
+                this.harga = harga,
+                this.stock = stock
+        }
+    }
+
+    class inUser {
+        constructor(nama) {
+            this.nama = nama,
+                this.role = "user"
+        }
+    }
+
+    let loginCondition = true
+
+    while (loginCondition) {
+        var home = prompt(`
+        Selamat datang di Toko.ku 🙎‍♀️🙍‍♂️
+        1. Login
+        2. Register
+        3. exit
+        `)
+
+        if (home == 1) {
+            var login = prompt('Silahkan login 🙎‍♀️🙍‍♂️')
+            if (user.filter((item) => item.nama == login && item.role == "admin").length > 0) {
+                adminPage: while (true) {
+
+                    alert(`Selamat datang ${login}`)
+                    var menu = parseInt(prompt(`
+                    Silahkan pilih menu :
+                    1. Add prooduct
+                    2. Hapus product
+                    3. Edit product
+                    4. Daftar user
+                `))
+                    if (menu === 1) {
+                        addPro: while (true) {
+                            let newProduct = prompt('Masukkan produk baru :')
+                            let newHarga = parseInt(prompt(`Masukkan harga ${produk[produk.length - 1].nama} :`))
+                            let newStock = parseInt(prompt(`Masukkan stock ${produk[produk.length - 1].nama} :`))
+                            var add = new inProduct(newProduct, newHarga, newStock)
+                            produk.push(add)
+                            let list = 'Persediaan Produk Toko Serba 🏬:\n'
+                            produk.map((val, i) => {
+                                list += `${i + 1}. ${val.nama} = Rp. ${val.harga.toLocaleString()} stock = ${val.stock}\n`
+                            })
+                            alert(list)
+                            let addAgain = confirm("Tambah produk lagi ?")
+                            if (!addAgain) {
+                                alert("Penambahan product selesai")
+                                break addPro
+                            }
+                        }
+                    } else if (menu === 2) {
+                        removePro: while (true) {
+                            let list = 'Pilih produk yang dihapus :\n'
+                            produk.map((val, i) => { list += `${i + 1}. ${val.nama} = Rp. ${val.harga.toLocaleString()} stock = ${val.stock}\n` })
+                            let remove = parseInt(prompt(list))
+                            produk.splice((remove - 1), 1)
+                            stock.splice((remove - 1), 1)
+                            harga.splice((remove - 1), 1)
+                            list = 'Produk Toko Serba 🏬:\n'
+                            produk.map((val, i) => { list += `${i + 1}. ${val.nama} = Rp. ${val.harga.toLocaleString()} stock = ${val.stock}\n` })
+                            alert(list)
+                            let addAgain = confirm("Hapus produk lagi ?")
+                            if (!addAgain) {
+                                alert("Penambahan product selesai")
+                                break removePro
+                            }
+                        }
+
+                    } else if (menu === 3) {
+                        editPro: while (true) {
+                            let list = 'Pilih produk yang diedit :\n'
+                            produk.map((val, i) => { list += `${i + 1}. ${val.nama} = Rp. ${val.harga.toLocaleString()} stock = ${val.stock}\n` })
+                            let edit = parseInt(prompt(list))
+                            let editMenu = parseInt(prompt('1. Edit nama\n2. Edit harga\n3. Edit stock'))
+                            if (editMenu === 1) {
+                                produk[edit - 1].nama = prompt(`Masukkan produk baru dari ${produk[edit - 1].nama}:`)
+                            } else if (editMenu === 2) {
+                                produk[edit - 1].harga = prompt(`Masukkan harga baru dari ${produk[edit - 1].nama}(${produk[edit - 1].harga}) :`)
+                            } else if (editMenu === 3) {
+                                produk[edit - 1].stock = prompt(`Masukkan stock baru dari ${produk[edit - 1]}(${produk[edit - 1].stock}) :`)
+                            }
+                            list = 'Produk Toko Serba 🏬:\n'
+                            produk.map((val, i) => { list += `${i + 1}. ${val.nama} = Rp. ${val.harga.toLocaleString()} stock = ${val.stock}\n` })
+                            alert(list)
+                            let addAgain = confirm("Edit produk lagi ?")
+                            if (!addAgain) {
+                                alert("Penambahan product selesai")
+                                break editPro
+                            }
+                        }
+
+                    } else if (menu === 4) {
+                        let listUser = 'Data user \n'
+                        user.map((item, index) => {
+                            if (item.role == 'user') {
+                                listUser += `${index + 1}. ${item.nama} role = ${item.role}\n`
+                            }
+                        })
+                        
+                        alert(listUser)
+                        // break adminPage
+                    } else {
+                        alert('🚧Wrong menu')
+                    }
+                }
+            } else if (user.filter((item) => item.nama == login && item.role == "user").length > 0) {
+                alert(`Halo ${login}, Selamat datang di Toko Serba 🏬`)
+                let marketCondition = true
+                while (marketCondition) {
+                    let list = 'Produk Toko Serba 🏬:\n'
+                    var chart = []
+                    //1. Manual looping with for
+                    // for (let i = 0; i < produk.length; i++) {
+                    //     list += `${i+1}. ${produk[i]} = Rp. ${harga[i].toLocaleString()}\n`
+                    // }
+
+                    //2. With iteration array.map() ==> map() bersifat seperti looping tetapi penggunaanya bergantung pada array mana yg digunakan
+                    produk.map((val, i) => { list += `${i + 1}. ${val.nama} = Rp. ${val.harga.toLocaleString()}\n` })
+                    alert(list)
+
+                    //condition varibale untuk mengaktifkan looping while 
+                    let qtyCondition = false
+                    //Pengecekan kondisi apakah stock produk mencukupi jumlah produk yang dibeli
+
+                    produk.map((item, index) => {
+                        do {
+                            var beli = parseInt(prompt(`Stock ${item.nama} = ${item.stock}, Beli ${item.nama} berapa ?`))
+                            if (beli > item.stock) { //jika jumlah yg dibeli melebihi stock
+                                alert(`Maaf stock ${item.nama} terbatas, pesan ulang`)
+                                qtyCondition = true
+                            } else {
+                                chart.push([item.nama, beli, item.harga, (beli * item.harga)])
+                                console.log(chart)
+                                qtyCondition = false
+                            }
+                        } while (qtyCondition);
+                    })
+
+                    let paymentCondition = false
+
+                    var totalBayar = 0
+                    chart.map((item, index) => { totalBayar += item[3] })
+                    var receipe = 'Total belanja anda adalah : \n'
+                    chart.map((item, i) => { receipe += `${i + 1}. Rp. ${item[2]} x ${item[1]} = Rp. ${item[3].toLocaleString()}\n` })
+                    alert(receipe + `\nTotal pembayaran = Rp. ${totalBayar.toLocaleString()}`)
+                    do {
+                        var bayar = parseInt(prompt("Bayarkan uang anda : "))
+                        if (bayar < totalBayar) {
+                            alert("Maaf uang anda kurang")
+                            paymentCondition = true
+                        } else {
+                            produk.map((val, index) => {
+                                chart.map((item, i) => { val.stock = (val.stock - item[1]) })
+                            })
+                            alert(`Terima kasih telah melakukan pembayaran, kembalian anda sebesar Rp. ${(bayar - totalBayar).toLocaleString()}`)
+                            var checkStock = "Stock barang\n"
+                            produk.map((item, i) => { checkStock += `${i + 1}. Stock ${item.nama} = ${item.stock}\n` })
+                            alert(checkStock)
+                            paymentCondition = false
+                        }
+                    } while (paymentCondition);
+
+                    let shopAgain = confirm("Ingin berbelanja lagi ?")
+                    if (shopAgain) {
+                        alert("Silahkan berbelanja kembali")
+                        marketCondition = true
+                    } else {
+                        alert("Terima kasih sudah berbelanja")
+                        marketCondition = false
+                    }
+                }
+            } else {
+                alert('User tidak terdaftar')
+            }
+        } else if (home == 2) {
+            let newUser = prompt(`Masukkan Nama Anda :`)
+            var addUser = new inUser(newUser)
+            user.push(addUser)
+        } else if (home == 3) {
+            loginCondition = false
+        }
+    }
+</script>
+
+</html>

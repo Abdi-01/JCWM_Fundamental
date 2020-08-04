@@ -1,0 +1,30 @@
+<script>
+    let value = 0, arr = []
+    while (true) {
+        value = parseInt(prompt("Masukkan Nilai : "))
+        if (isNaN(value)) {
+            break;
+        } else {
+            arr.push(value)
+        }
+    }
+
+    let min = arr[0], max = arr[0]
+    arr.forEach((item) => {
+        min = item < min ? item : min
+        max = item > max ? item : max
+    })
+
+    for (k = 0; k < arr.length; k++) {//berhenti sebelum melebihi index
+        for (l = k + 1; l < arr.length; l++) {
+            hasil = arr[k] - arr[l]//membandingkan setiap item dengan semua item satu persatu
+            if (hasil > 0) {
+                [arr[k], arr[l]] = [arr[l], arr[k]]
+            }
+        }
+    }
+
+    console.log(arr)
+    console.log('Min : ', min)
+    console.log('Max : ', max)
+</script>

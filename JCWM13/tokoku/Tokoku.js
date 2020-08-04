@@ -236,26 +236,46 @@ function filterClear() {
 //Transaction User
 function addToCart(index) {
     var productList = dbTemp.length > 0 ? dbTemp : dbProduct
-    if (dbUserCart.length == 0 || dbUserCart.filter((item) => item.name == productList[index].name && item.username == loginSuccess[0].username).length == 0) {
-        dbUserCart.push(new newCart(loginSuccess[0].username, productList[index].image, productList[index].name, productList[index].category, productList[index].price, 1))
+    if (productList[index].stock == 0) {
+        alert('Stok tidak mencukupi')
     } else {
-        for (let i = 0; i < dbUserCart.length; i++) {
-            if (dbUserCart[i].name == productList[index].name && dbUserCart[i].username == loginSuccess[0].username) {
-                dbUserCart[i].qty++
+        let qty = parseInt(prompt('Masukkan jumlah yang dibeli '))
+        if (qty > productList[index].stock) {
+            alert('Stok tidak mencukupi')
+        } else {
+            if (dbUserCart.length == 0 || dbUserCart.filter((item) => item.name == productList[index].name && item.username == loginSuccess[0].username).length == 0) {
+                dbUserCart.push(new newCart(loginSuccess[0].username, productList[index].image, productList[index].name, productList[index].category, productList[index].price, qty))
+            } else {
+                for (let i = 0; i < dbUserCart.length; i++) {
+                    if (dbUserCart[i].name == productList[index].name && dbUserCart[i].username == loginSuccess[0].username) {
+                        dbUserCart[i].qty += qty
+                    }
+                }
             }
+            productList[index].stock -= qty
         }
     }
-
+    printProduct(productList)
     printCartUser()
-
 }
 
 function delete_cart(index) {
     if (dbUserCart[index].qty > 1) {
         dbUserCart[index].qty -= 1
+        dbProduct.forEach((item) => {
+            if (item.name == dbUserCart[index].name) {
+                item.stock += 1
+            }
+        })
     } else {
+        dbProduct.forEach((item) => {
+            if (item.name == dbUserCart[index].name) {
+                item.stock += 1
+            }
+        })
         dbUserCart.splice(index, 1)
     }
+    printProduct()
     printCartUser()
 }
 
@@ -318,7 +338,7 @@ function printReceiptUser() {
             totalAmount += item.price * item.qty
         }
     })
-    
+
     document.getElementById('tbRec').innerHTML = htmlElement
     document.getElementById('tbReceipt').innerHTML = `
     <tr>

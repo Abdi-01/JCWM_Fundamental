@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Value</title>
+</head>
+
+<body>
+    <h3>Random Value 🕵️‍♀️</h3>
+    <h1 id='random'></h1>
+</body>
+<script>
+    //Generate Random Value
+    alert('Generate Random 1')
+    console.log("Tahap 1")
+    alert('Generate Random 2')
+    console.log("Tahap 2")
+    alert('Generate Random 3')
+    console.log("Tahap 3")
+    var random = Math.random() //variable untuk menampung fungsi random
+    document.getElementById('random').innerHTML = Math.round(random * 100)//random dikali 100 agar range angka random menjadi 0-100
+    // document.getElementById("random").innerHTML = 7*Math.random()
+    console.log(random)
+</script>
+
+</html>

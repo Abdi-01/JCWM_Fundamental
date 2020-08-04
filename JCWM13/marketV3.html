@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //Deklarasi harga produk
+    var hargaOreo = 8000
+    var hargaChitato = 7900
+    var hargaPonari = 7500
+
+    //Deklarasi stock produk
+    var stockOreo = 20
+    var stockChitato = 15
+    var stockPonari = 10
+
+    let marketCondition = true
+    alert('Selamat datang diToko Serba')
+    //membuat multipleline ada dua cara
+    //1. memanfaatkan "\n" jika menggunakan " " atau ' '
+    //2. string concatation dengan langsung enter
+    while (marketCondition) {
+
+        alert(`Produk dagangan : 
+    1. Oreo = Rp. ${hargaOreo.toLocaleString()}
+    2. Chitato = Rp. ${hargaChitato.toLocaleString()}
+    3. Ponari Sweat = Rp. ${hargaPonari.toLocaleString()}`)
+
+        //condition varibale untuk mengaktifkan looping while 
+        let qtyCondition = false
+
+        //Pengecekan kondisi apakah stock produk mencukupi jumlah produk yang dibeli
+        do {
+            var beliOreo = parseInt(prompt(`Stock Oreo = ${stockOreo}, Beli Oreo berapa ?`))
+            if (beliOreo > stockOreo) { //jika jumlah yg dibeli melebihi stock
+                alert("Maaf stock Oreo terbatas, pesan ulang")
+                qtyCondition = true
+            } else {
+                qtyCondition = false
+            }
+        } while (qtyCondition);
+
+        do {
+            var beliChitato = parseInt(prompt(`Stock Chitato = ${stockChitato}, Beli Chitato berapa ?`))
+            if (beliChitato > stockChitato) {
+                alert("Maaf stock Chitato terbatas, pesan ulang")
+                qtyCondition = true
+            } else {
+                qtyCondition = false
+            }
+        } while (qtyCondition);
+
+        do {
+            var beliPonari = parseInt(prompt(`Stock Ponari = ${stockPonari}, Beli Ponari Sweat berapa ?`))
+            if (beliPonari > stockPonari) {
+                alert("Maaf stock Ponari terbatas, pesan ulang")
+                qtyCondition = true
+            } else {
+                qtyCondition = false
+            }
+        } while (qtyCondition);
+
+        let paymentCondition = false
+
+        let bayarOreo = hargaOreo * beliOreo
+        let bayarChitato = hargaChitato * beliChitato
+        let bayarPonari = hargaPonari * beliPonari
+
+        var totalBayar = bayarOreo + bayarChitato + bayarPonari
+
+        alert(`Total belanja anda adalah : \n1. Oreo Rp. ${hargaOreo} x ${beliOreo} = Rp. ${bayarOreo.toLocaleString()}\n2. Chitato Rp. ${hargaChitato} x ${beliChitato} = Rp. ${bayarChitato.toLocaleString()}\n3. Ponari Sweat Rp. ${hargaPonari} x ${beliPonari} = Rp. ${bayarPonari.toLocaleString()}
+        Total pembayaran = Rp. ${totalBayar.toLocaleString()}`)
+        do {
+            var bayar = parseInt(prompt("Bayarkan uang anda : "))
+            if (bayar < totalBayar) {
+                alert("Maaf uang anda kurang")
+                paymentCondition = true
+            } else {
+                stockOreo = stockOreo - beliOreo
+                stockChitato = stockChitato - beliChitato
+                stockPonari = stockPonari - beliPonari
+                alert(`Terima kasih telah melakukan pembayaran, kembalian anda sebesar Rp. ${(bayar - totalBayar).toLocaleString()}`)
+                alert(`Stock barang \n1. Stock Oreo = ${stockOreo}\n2. Stock Chitato = ${stockChitato}\n3. Stock Ponari = ${stockPonari}`)
+                paymentCondition = false
+            }
+        } while (paymentCondition);
+
+        let shopAgain = confirm("Ingin berbelanja lagi ?")
+        if (shopAgain) {
+            alert("Silahkan berbelanja kembali")
+            marketCondition = true
+        } else {
+            alert("Terima kasih sudah berbelanja")
+            marketCondition = false
+        }
+    }
+
+</script>
+
+</html>

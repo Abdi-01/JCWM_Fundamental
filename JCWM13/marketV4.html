@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market</title>
+</head>
+
+<body></body>
+<script>
+    //Deklarasi harga produk
+    var produk = ["Oreo", "Chitato", "Ponari"]
+    var harga = [8000, 7900, 6000]
+    var stock = [20, 15, 20]
+    let user = ["Admin", "Budi", "Andi"]
+    let loginCondition = true
+
+    while (loginCondition) {
+        var login = prompt('Silahkan login 🙎‍♀️🙍‍♂️')
+
+        if (login === "Admin") {
+            alert(`Selamat datang ${login}`)
+            var menu = parseInt(prompt(`
+        Silahkan pilih menu :
+        1. Add prooduct
+        2. Hapus product
+        3. Edit product
+        4. Tambah user
+        `))
+            if (menu === 1) {
+                addPro: while (true) {
+                    let newProduct = prompt('Masukkan produk baru :')
+                    produk.push(newProduct)
+                    let newHarga = parseInt(prompt(`Masukkan harga ${produk[produk.length - 1]} :`))
+                    harga.push(newHarga)
+                    let newStock = parseInt(prompt(`Masukkan stock ${produk[produk.length - 1]} :`))
+                    stock.push(newStock)
+                    let list = 'Persediaan Produk Toko Serba 🏬:\n'
+                    produk.map((val, i) => { list += `${i + 1}. ${val} = Rp. ${harga[i].toLocaleString()} stock = ${stock[i]}\n` })
+                    alert(list)
+                    let addAgain = confirm("Tambah produk lagi ?")
+                    if (!addAgain) {
+                        alert("Penambahan product selesai")
+                        break addPro
+                    }
+                }
+            } else if (menu === 2) {
+                removePro: while (true) {
+                    let list = 'Pilih produk yang dihapus :\n'
+                    produk.map((val, i) => { list += `${i + 1}. ${val} = Rp. ${harga[i].toLocaleString()} stock = ${stock[i]}\n` })
+                    let remove = parseInt(prompt(list))
+                    produk.splice((remove - 1), 1)
+                    stock.splice((remove - 1), 1)
+                    harga.splice((remove - 1), 1)
+                    list = 'Produk Toko Serba 🏬:\n'
+                    produk.map((val, i) => { list += `${i + 1}. ${val} = Rp. ${harga[i].toLocaleString()} stock = ${stock[i]}\n` })
+                    alert(list)
+                    let addAgain = confirm("Hapus produk lagi ?")
+                    if (!addAgain) {
+                        alert("Penambahan product selesai")
+                        break removePro
+                    }
+                }
+
+            } else if (menu === 3) {
+                editPro: while (true) {
+                    let list = 'Pilih produk yang diedit :\n'
+                    produk.map((val, i) => { list += `${i + 1}. ${val} = Rp. ${harga[i].toLocaleString()} stock = ${stock[i]}\n` })
+                    let edit = parseInt(prompt(list))
+                    let editMenu = parseInt(prompt('1. Edit nama\n2. Edit harga\n3. Edit stock'))
+                    if (editMenu === 1) {
+                        produk[edit - 1] = prompt(`Masukkan produk baru dari ${produk[edit - 1]}:`)
+                    } else if (editMenu === 2) {
+                        harga[edit - 1] = prompt(`Masukkan harga baru dari ${produk[edit - 1]}(${harga[edit - 1]}) :`)
+                    } else if (editMenu === 3) {
+                        stock[edit - 1] = prompt(`Masukkan stock baru dari ${produk[edit - 1]}(${stock[edit - 1]}) :`)
+                    }
+                    list = 'Produk Toko Serba 🏬:\n'
+                    produk.map((val, i) => { list += `${i + 1}. ${val} = Rp. ${harga[i].toLocaleString()} stock = ${stock[i]}\n` })
+                    alert(list)
+                    let addAgain = confirm("Edit produk lagi ?")
+                    if (!addAgain) {
+                        alert("Penambahan product selesai")
+                        break editPro
+                    }
+                }
+
+            } else if (menu === 4) {
+
+            } else {
+                alert('🚧Wrong menu')
+            }
+
+        } else if (user.includes(login) && login != 'Admin') {
+            alert(`Halo ${login}, Selamat datang di Toko Serba 🏬`)
+            let marketCondition = true
+            var chart = []
+            while (marketCondition) {
+                let list = 'Produk Toko Serba 🏬:\n'
+                //1. Manual looping with for
+                // for (let i = 0; i < produk.length; i++) {
+                //     list += `${i+1}. ${produk[i]} = Rp. ${harga[i].toLocaleString()}\n`
+                // }
+
+                //2. With iteration array.map() ==> map() bersifat seperti looping tetapi penggunaanya bergantung pada array mana yg digunakan
+                produk.map((val, i) => { list += `${i + 1}. ${val} = Rp. ${harga[i].toLocaleString()}\n` })
+                alert(list)
+
+                //condition varibale untuk mengaktifkan looping while 
+                let qtyCondition = false
+                //Pengecekan kondisi apakah stock produk mencukupi jumlah produk yang dibeli
+
+                produk.map((item, index) => {
+                    do {
+                        var beli = parseInt(prompt(`Stock ${item} = ${stock[index]}, Beli ${item} berapa ?`))
+                        if (beli > stock[index]) { //jika jumlah yg dibeli melebihi stock
+                            alert(`Maaf stock ${item} terbatas, pesan ulang`)
+                            qtyCondition = true
+                        } else {
+                            chart.push([item, beli, harga[index], (beli * harga[index])])
+                            console.log(chart)
+                            qtyCondition = false
+                        }
+                    } while (qtyCondition);
+                })
+
+                let paymentCondition = false
+
+                var totalBayar = 0
+                chart.map((item, index) => { totalBayar += item[3] })
+                var receipe = 'Total belanja anda adalah : \n'
+                chart.map((item, i) => { receipe += `${i + 1}. Rp. ${harga[i]} x ${item[1]} = Rp. ${item[3].toLocaleString()}\n` })
+                alert(receipe + `\nTotal pembayaran = Rp. ${totalBayar.toLocaleString()}`)
+                do {
+                    var bayar = parseInt(prompt("Bayarkan uang anda : "))
+                    if (bayar < totalBayar) {
+                        alert("Maaf uang anda kurang")
+                        paymentCondition = true
+                    } else {
+                        chart.map((item, i) => { stock[i] = (stock[i] - item[1]) })
+                        alert(`Terima kasih telah melakukan pembayaran, kembalian anda sebesar Rp. ${(bayar - totalBayar).toLocaleString()}`)
+                        var checkStock = "Stock barang\n"
+                        stock.map((item, i) => { checkStock += `${i + 1}. Stock ${produk[i]} = ${item}\n` })
+                        alert(checkStock)
+                        paymentCondition = false
+                    }
+                } while (paymentCondition);
+
+                let shopAgain = confirm("Ingin berbelanja lagi ?")
+                if (shopAgain) {
+                    alert("Silahkan berbelanja kembali")
+                    marketCondition = true
+                } else {
+                    alert("Terima kasih sudah berbelanja")
+                    marketCondition = false
+                }
+            }
+        }
+    }
+</script>
+
+</html>

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Date</title>
 </head>
-
 <body>
     <h3>Tanggal Hari Kemarin 🕵️‍♀️</h3>
     <h1 id='yesterday'></h1>
@@ -18,12 +17,22 @@
 <script>
     //get date
     var date = new Date()
-    alert("Yesterday = " + (date.getDate() - 1) + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear())
-    alert("Today = " + date.getDate() + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear())
-    alert("Tomorrow = " + (date.getDate() + 1) + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear())
-    document.getElementById("yesterday").innerHTML = (date.getDate() - 1) + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear()
-    document.getElementById("today").innerHTML = date.getDate() + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear()
-    document.getElementById("tomorrow").innerHTML = (date.getDate() + 1) + ' ' + (date.getMonth() + 1) + ' ' + date.getFullYear()
+    var myDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    var myMonths = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    var today = date.getDate()
+    var month = date.getMonth() + 1
+    var year = date.getFullYear()
+    // alert(`Yesterday = ${myDays[date.getDay()-1]}, ${today - 1} - ${month} - ${year}
+    // Today = ${myDays[date.getDay()]}, ${today} - ${month} - ${year}
+    // Tomorrow = ${myDays[date.getDay() + 1]}, ${today + 1} - ${month} - ${year}
+    // `)
+    // alert("Yesterday = " + myDays[today - 1] + ', ' + (today - 1) + '-' + month + '-' + year)
+    // alert("Today = " + myDays[today] + ', ' + today + '-' + month + '-' + year)
+    // alert("Tomorrow = " + myDays[today + 1] + ', ' + (today + 1) + '-' + month + '-' + year)
+    document.getElementById("yesterday").innerHTML = myDays[date.getDay() - 1] + ', ' + (today - 1) + '-' + month + '-' + year
+    document.getElementById("today").innerHTML = myDays[date.getDay()] + ', ' + today + '-' + month + '-' + year
+    document.getElementById("tomorrow").innerHTML = myDays[date.getDay() + 1] + ', ' + (today + 1) + '-' + month + '-' + year
+    // document.write(date.getHours())
 </script>
 
 </html>

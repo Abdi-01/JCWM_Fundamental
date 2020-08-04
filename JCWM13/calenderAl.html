@@ -109,6 +109,7 @@
             for (let j = 0; j < 7; j++) {//untuk membuat col
                 if (col >= startDay && day <= totalDays) {
                     console.log('bulan', bulan)
+                    console.log(day)
                     htmlElement += `<td style="background-color:${day === new Date().getDate() && (bulan - 1) == new Date().getMonth() ? 'red' : null};" onclick="addTodo(${day},${bulan},${tahun})">${day}</td>`
                     day++
                 } else {
@@ -118,7 +119,6 @@
             }
             htmlElement += '</tr>'
         }
-        // console.log(result)
         document.getElementById('tbCal').innerHTML = htmlElement
         printKegiatan()
     }
@@ -129,16 +129,35 @@
         data.forEach((item, index) => {
             if (item.waktu.split("/")[1] == bulan) {
                 htmlToDo += `
-            <tr>
-               <td>${item.waktu}</td>
-                <td>${item.kegiatan}</td>
-                <td>${item.detail}</td>
-                <td><input type="button" value="Edit" onclick="edit(${index})" /><input type="button" value="Hapus" onclick="remove(${index})" /></td>
-            </tr>`
+                    <tr>
+                        <td>${item.waktu}</td>
+                        <td>${item.kegiatan}</td>
+                        <td>${item.detail}</td>
+                        <td><input type="button" value="Edit" onclick="edit(${index})" /><input type="button" value="Hapus" onclick="remove(${index})" /></td>
+                    </tr>`
             }
         })
         document.getElementById('tbKegiatan').innerHTML = htmlToDo
     }
 </script>
-
 </html>
+
+
+
+
+
+
+
+
+
+<!-- data.forEach((item, index) => {
+    if (item.waktu.split("/")[1] == bulan) {
+        htmlToDo += `
+    <tr>
+       <td>${item.waktu}</td>
+        <td>${item.kegiatan}</td>
+        <td>${item.detail}</td>
+        <td><input type="button" value="Edit" onclick="edit(${index})" /><input type="button" value="Hapus" onclick="remove(${index})" /></td>
+    </tr>`
+    }
+}) -->

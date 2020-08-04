@@ -13,8 +13,9 @@
 </style>
 
 <body>
-    <input type="number" id="p" placeholder="Panjang" />
-    <input type="number" id="l" placeholder="Lebar" />
+    <p>1. Persegi<br>2. Segitiga siku kiri <br> 3. Segitiga siku kanan</p>
+    <input type="number" id="shapeChoose" placeholder="Pilih Shape" />
+    <input type="number" id="ukuran" placeholder="Ukuran" />
     <input type="button" onclick="generate()" value="Generate Shape" />
     <div id="shape">
     </div>
@@ -24,35 +25,40 @@
     function generate() {
         var symD = ""
         console.log(count)
-        for (let i = 1; i <= parseInt(document.getElementById("l").value) + count; i++) {
-            symD += '<p>'
-            for (let j = 1; j <= parseInt(document.getElementById("p").value) + count; j++) {
-                i % 2 == 0 ?
-                    symD += j % 2 == 0 ? '* ' : '# '
-                    :
-                    symD += j % 2 == 0 ? '# ' : '* '
+        var shape = parseInt(document.getElementById("shapeChoose").value)
+        if (shape == 1) {
+            for (let i = 1; i <= parseInt(document.getElementById("ukuran").value) + count; i++) {
+                symD += '<p>'
+                for (let j = 1; j <= parseInt(document.getElementById("ukuran").value) + count; j++) {
+                    i % 2 == 0 ?
+                        symD += j % 2 == 0 ? '* ' : '# '
+                        :
+                        symD += j % 2 == 0 ? '# ' : '* '
+                }
+                symD += "</p>"
             }
-            symD += "</p>"
+        } else if (shape == 2) {
+            for (let i = 1; i <= parseInt(document.getElementById("ukuran").value) + count; i++) {
+                symD += '<p>'
+                for (let j = 1; j <= i + count; j++) {
+                    symD += '* '
+                }
+                symD += "</p>"
+            }
+        } else if (shape == 3) {
+            for (let i = 1; i <= parseInt(document.getElementById("ukuran").value) + count; i++) {
+                symD += '<p>'
+                for (let k = parseInt(document.getElementById("ukuran").value); k > i; k--) {
+                    symD += '&nbsp;&nbsp; '
+                }
+                for (let j = 1; j <= i + count; j++) {
+                    symD += '# '
+                }
+                symD += "</p>"
+            }
         }
         document.getElementById("shape").innerHTML = symD
-        if (count == 0 || count == 1) {
-            document.getElementById("l").value = parseInt(document.getElementById("l").value) + count
-            document.getElementById("p").value = parseInt(document.getElementById("p").value) + count
-            count = 1
-        }
     }
-    // var symD = ""
-    // for (let i = 1; i <= 5; i++) {
-    //     // symD += '<p>'
-    //     for (let j = 1; j <= 5; j++) {
-    //         symD += `${j} `
-    //     }
-    //     symD += "<br/>"
-    // }
-
-    // console.log(symD)
-    // document.getElementById("shape").innerHTML = symD
-
 </script>
 
 </html>

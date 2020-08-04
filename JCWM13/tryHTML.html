@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Exercise</title>
+</head>
+
+<body>
+    <h4>Kuadrat</h4>
+    <form>
+        <label>Masukkan angka</label>
+        <input type="number" id="value" />
+        <input type="button" value="Kuadrat" onclick="kuadrat()" />
+        <h5 id="hasilSqrt"></h5>
+    </form>
+    <h4>Pangkat</h4>
+    <form>
+        <label>Masukkan angka</label>
+        <input type="number" id="angka" />
+        <label>Masukkan pangkat</label>
+        <input type="number" id="angkaPangkat" />
+        <input type="button" value="Pangkat" onclick="pangkat()" />
+        <h5 id="hasilPangkat"></h5>
+    </form>
+    <h4>Cari huruf</h4>
+    <form>
+        <label>Masukkan Kalimat</label>
+        <input type="text" id="kalimat" />
+        <label>Masukkan huruf yang dicari</label>
+        <input type="text" id="huruf" />
+        <input type="button" value="Cari" onclick="cariHuruf()" />
+        <h5 id="hasilPencarian"></h5>
+    </form>
+    <input type="radio" name="Gender" value="Pria" id="pria">Pria</input>
+    <input type="radio" name="Gender" value="Wanita" id="wanita">Wanita</input>
+</body>
+<script>
+    //Function kuadrat
+    function kuadrat() {
+        let val = document.getElementById('value').value
+        let hasil = Math.pow(val, 2)
+        document.getElementById('hasilSqrt').innerHTML = `Hasil kuadrat ${val}<sup>2</sup>= ${hasil}`
+    }
+    //Function pangkat
+    function pangkat() {
+        let val = document.getElementById('angka').value
+        let valPangkat = document.getElementById('angkaPangkat').value
+        let hasil = Math.pow(document.getElementById('angka').value, document.getElementById('angkaPangkat').value)
+        document.getElementById('hasilPangkat').innerHTML = `Hasil kuadrat ${val}<sup>${valPangkat}</sup>= ${hasil}`
+    }
+    //Function pencarian huruf
+    function cariHuruf() {
+        var count = 0
+        var kalimat = document.getElementById('kalimat').value
+        var huruf = document.getElementById('huruf').value
+        for (let i = 0; i < kalimat.length; i++) {
+            if (kalimat.charAt(i).toLowerCase() == huruf.toLowerCase()) {
+                count += 1
+            }
+        }
+        document.getElementById('hasilPencarian').innerHTML = `Jumlah huruf ${huruf} adalah ${count}`
+    }
+</script>
+
+</html>

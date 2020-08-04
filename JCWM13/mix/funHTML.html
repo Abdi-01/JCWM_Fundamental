@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question</title>
+    <style>
+        table,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width: 100vw;text-align: center;">
+        <!-- <h1>Data Stock Produk</h1>
+            <h3>Stock baju = </h3>
+            <h3 id="baju"></h3>
+            <h3>Stock celana = </h3>
+            <h3 id="celana"></h3> -->
+
+        <!-- <h3>Random Value 🕵️‍♀️</h3>
+        <h1 id='random'></h1> -->
+        <!-- 
+        <h3>Tanggal Hari Kemarin 🕵️‍♀️</h3>
+        <h1 id='yesterday'></h1>
+        <h3>Tanggal Hari Ini 🕵️‍♀️</h3>
+        <h1 id='today'></h1>
+        <h3>Tanggal Hari Besok 🕵️‍♀️</h3>
+        <h1 id='tomorrow'></h1> -->
+        <!-- <button onclick="tanyakabar()">Tanya Kabar</button> or-->
+        <!-- <button onclick=tanyakabar()>Tanya Kabar</button>
+        </br><b>Text Bold</b></br>
+        <strong> Text Strong</strong></br>
+        <i>Text Italic</i></br>
+        <em>Text Emphasized</em></br>
+        <mark>Text Mark</mark></br>
+        <small>Text Small</small></br>
+        <del>Text Deleted</del></br>
+        <ins>Text Inserted</ins></br>
+        This<sup>Text Superscript</sup></br>
+        This<sub>Text Subscript</sub></br> -->
+        <center>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Grade</th>
+                    <th>Star</th>
+                </tr>
+                <tr>
+                    <th>Oura</th>
+                    <th>Mythic</th>
+                    <th>20</th>
+                </tr>
+            </table>
+        </center>
+    </div>
+</body>
+<script>
+    //Tambah stock barang
+    // var baju = 10
+    // var celana = 20
+    // alert(`Stock produk saat ini :\n 1. Baju = ${baju}\n 2. Celana = ${celana}`)
+    // let tambahBaju = prompt(`Tambah stock baju = `)
+    // let tambahCelana = prompt(`Tambah stock celana = `)
+
+    // var stockBaju = baju + parseInt(tambahBaju)
+    // var stockCelana = celana + parseInt(tambahCelana)
+
+    // alert(`Stock produk terbaru :\n 1. Baju = ${stockBaju}\n 2. Celana = ${stockCelana} `)
+    // document.getElementById("baju").innerHTML=stockBaju
+    // document.getElementById("celana").innerHTML=stockCelana
+    // alert("Deteksi Angka")
+    // var val = parseInt(prompt("Masukkan value :"))
+    // if (isNaN(val)) {
+    //     alert("Input bukan angka")
+    // } else if (val < 0) {
+    //     alert("Angka negatif")
+    // }else{
+    //     alert("Angka positif")
+    // }
+    // let user = parseInt(prompt("Masukkan angka"))
+    // console.log("Triangle-1")
+    // var symD = ""
+    // for (let i = 1; i <= user; i++) {
+    //     for (let j = 1; j <= i; j++) {
+    //         symD += `${j} `
+    //     }
+    //     if (i < user) {
+    //         symD += "\n"
+    //     }
+    // }
+    // alert(symD)
+    // let hasil = Math.round(Math.random() * 5)
+    // if (user == hasil) {
+    //     alert(`Nilai input ${user} sama dengan ${hasil}`)
+    // } else {
+    //     alert(`nilai tebakan kamu ${user} salah, yang benar ${hasil}`)
+    // }
+
+    //cek huruf vokal
+
+    let kata = prompt("Masukkan kalimat")
+    function vowel() {
+        let vokal = ''
+        for (let i = 0; i < kata.length; i++) {
+            //mengecek apakah huruf pada index i berupa huruf vokal
+            if (kata.charAt(i).toLowerCase() == 'a' || kata.charAt(i).toLowerCase() == 'i' || kata.charAt(i).toLowerCase() == 'u' || kata.charAt(i).toLowerCase() == 'e' || kata.charAt(i).toLowerCase() == 'o') {
+                //mengecek varible prnampung huruf vokal apakah meiliki huruf vokal yg terdeteksi
+                if (!vokal.includes(kata.charAt(i).toLowerCase())) {//tanda ! menandakan reverse value awalnya true ==> false
+                    //jika huruf vokal yg terdeteksi tidak ada pada variable penampung, maka huruf tersebut ditambahkan
+                    vokal += kata.charAt(i).toLowerCase()
+                }
+            }
+        }
+        return alert(`
+        Kalimat = ${kata}
+        Huruf vokal = ${vokal}
+        Jumlah jenis huruf vokal = ${vokal.length} 
+        `)
+    }
+
+    vowel()
+    // var polin = prompt("Masukkan kata :")
+    // if (polin.split('').reverse().join('').toLowerCase() == polin.toLowerCase()) {
+    //     alert(`Kata ${polin} ini ✅ polindrom ${polin.split('').reverse().join('')}`)
+    // } else {
+    //     alert(`Kata ${polin} ini bukan ❌ polindrom ${polin.split('').reverse().join('')}`)
+    // }
+</script>
+
+</html>

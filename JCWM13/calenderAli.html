@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice 02 : Calendar</title>
+    <style>
+        table,
+        tr,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            height: 50px;
+            width: 50px;
+            text-align: center;
+        }
+
+        th {
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>SU</th>
+                <th>MO</th>
+                <th>TU</th>
+                <th>WE</th>
+                <th>TH</th>
+                <th>FR</th>
+                <th>ST</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</body>
+<script>
+    let date = new Date(2020, 4)
+    let startDay = date.getDay() + 1
+    let totalDays = new Date(2020, 5, 0).getDate()
+    // console.log(new Date().getDate())
+    // console.log(startDay)
+    // console.log(totalDays)
+
+    // create element
+    let result = [], col = 1, day = 1
+    for (let i = 0; i < 6; i++) {
+        let tr = document.createElement('tr')
+        if (day > totalDays) continue
+        for (let j = 0; j < 7; j++) {
+            let td = document.createElement('td')
+            if (col >= startDay && day <= totalDays) {
+                td.textContent = day
+                if (day === new Date().getDate()) td.style.backgroundColor = 'red'
+                tr.append(td)
+                day++
+            } else {
+                tr.append(td)
+            }
+            col++
+        }
+        result.push(tr)
+    }
+    console.log(result)
+    document.getElementsByTagName('table')[0].tBodies[0].append(...result)
+
+</script>
+
+</html>
