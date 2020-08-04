@@ -1,0 +1,72 @@
+Day 01 :
+	1. Mengenalkan environtment programming yang akan dipelajari
+		a. Jenis bahasa pemrogaman : http://pradsource.blogspot.com/2017/05/level-bahasa-pemograman-komputer.html
+			i. low level
+			ii.  high level
+		b. Kategori software
+			i. PC application (file.exe)
+			ii. Website (company profile)
+			iii. Web App (e-commerce,social media)
+			iv. Mobile App (native app, hybrid app)
+		c. Divisi" dalam pengembangan sebuah software
+			i. UI/UX
+			ii. Front-end
+			iii. Back-end
+			iv. Data Sience
+			v. Devops
+			vi. Digital marketing (SEO)
+		d. Alur pengembangan suatu software : https://www.manifera.com/6-basic-steps-software-development-process/
+			i. Waterfall
+			ii. Agile
+		e. Contoh usaha yang banyak memanfaatkan programmer
+			i. Software House : icehouse, vodjo, SiSi
+			ii. E-Commerce : tokopedia, bukalapak
+		f. Tahapan belajar programming versi AL 
+			i. Baca alur sistem
+			ii. Baca coding
+			iii. Menulis program
+			iv. Merancang sistem
+			v. Mengembangkan program
+		g. Tahapan membuat coding
+			i. Sistem yang penting jalan
+			ii. Efisiensi coding
+			iii. Efisiensi performa aplikasi (Bisa merubah sistem, bisa merubah coding)
+	2. Bagaimana komputer memproses sebuah program
+		a. Bagian terpenting komputer dalam memproses sebuah aplikasi
+			i. Memory : RAM
+			ii. CPU : 
+		b. Compiler :  
+			i. Kelebihan
+				1) Siap utk dijalankan
+				2) Lebih cepat
+				3) Source code tidak terlihat (Blackbox)
+			ii. Kekurangan
+				1) Tidak lintas platform, hanya utk platform tertentu seperti .exe utk windows dan .app untuk macOS
+				2) Tidak fleksibel karena user hanya mendapatkan file hasil compile
+				3) Adanya langkah tambahan, yaitu proses compile tadi
+			iii. C, C++, Objective-C
+		c. Interpreter : 
+			i. Kelebihan
+				1) Lintas platform, contoh javascript yg bisa dibuka dimana saja selama platform memiliki interpreter(web browser)
+				2) Fleksibel, coding yg diberikan masih bisa dirubah
+				3) Mudah di uji
+			ii. Kekurangan
+				1) Butuh interpreter atau web browser
+				2) Lebih lambat karena setiap program dijalankan coding harus diinterpretasi dulu
+				3) Source code mudah diakses
+			iii. Javascript, php
+	3. Yang akan diajarkan dipurwadhika
+		a. Bahasa : Javascript 
+			i. Gratis
+			ii. Tidak perlu instalasi, krn tiap web browser punya interpreter javascript
+			iii. Hanya butuh web browser
+			iv. Bahasa scripting
+			v. Kategory untype, tipe data disetiap variable bisa bebas
+		b. Front-end : 
+			i. HTML: Kerangka 
+			ii. CSS : Dekorasi
+			iii. React JS : Library
+			iv. React Native : Framework
+		c. Backend : 
+			i. Node.JS :
+			ii. Postman : API tester
