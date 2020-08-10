@@ -1,0 +1,32 @@
+<script>
+    /*
+    Tugas :
+    1. Membuat aplikasi sekolah
+        - Menu utama : 
+            Registrasi, 
+            Cek Siswa terdaftar atau tidak dan absennya berapa,
+            Menghapus siswa(input namanya)
+
+    PR : 
+    1. Market : 
+        - Memiliki data produk, stock dan harga menngunakan array
+        - Bisa menambahkan produk baru
+        - Bisa melakukan update qty disetiap transaksi
+        - Bila stock produk = 0, maka datanya akan dihapus dari arraynya
+    */
+
+    let siswa = ["Harry", "Snap", "Bima", "Budi"]
+
+    alert("Selamat datang di Hogwart")
+    let menu = prompt(`1. Register\n2. Cari Siswa\n3. Hapus Siswa`)
+
+    if (menu == 1) {
+        let regis = prompt(`Masukkan nama : `)
+        siswa.push(regis)
+        alert(`${regis} Sudah terdaftar\n${siswa.join('\n')}`)
+    } else if (menu == 2) {
+
+    } else if (menu == 3) {
+
+    }
+</script>

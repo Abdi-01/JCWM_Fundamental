@@ -20,4 +20,55 @@
     */
     // let kalimat = prompt("Masukkan kalimat atau kata :").toUpperCase()
     // alert(kalimat)
+
+    let hargaApel = 5000, hargaMangga = 4000, hargaBuahNaga = 10000
+    let qty, bayar, totalBeli
+
+    while (true) {
+        let market = prompt(`Silahkan belanja :
+        a. Apel Rp. ${hargaApel}
+        b. Mangga Rp. ${hargaMangga}
+        c. Buah Naga Rp. ${hargaBuahNaga}
+        `)
+
+        if (market == "a" || market.toLowerCase() == "apel") {
+            qty = prompt("Jumlah Apel yang dibeli berapa ?")
+            console.log("Number ? ", !isNaN(qty))
+            if (isNaN(qty)) {
+                alert("Input kamu salah")
+            } else {
+                totalBeli = parseInt(qty) * hargaApel
+            }
+            bayar = parseInt(prompt(`Total belanja anda : Rp. ${totalBeli}
+            Masukkan uang anda :
+            `))
+            if (bayar < totalBeli) {
+                alert("Uang kamu kurang")
+                let konf = confirm("Ada uang lebih gag ?")
+                if (konf) {
+                    bayar = parseInt(prompt(`Total belanja anda : Rp. ${totalBeli}
+                    Masukkan uang anda lagi :
+                    `))
+                    alert(`Kembalian anda adalah Rp. ${bayar - totalBeli}`)
+                } else {
+                    alert("Maaf belanja kamu batal")
+                }
+            } else {
+                alert(`Kembalian anda adalah Rp. ${bayar - totalBeli}`)
+            }
+        } else if (market == "b" || market.toLowerCase() == "mangga") {
+            qty = parseInt(prompt("Jumlah Mangga yang dibeli berapa ?"))
+            totalBeli = qty * hargaMangga
+            bayar = parseInt(prompt(`Total belanja anda : Rp. ${totalBeli} 
+            Masukkan uang anda :
+            `))
+            alert(`Kembalian anda adalah Rp. ${bayar - totalBeli}`)
+        }
+
+        if (!confirm("Belanja lagi ?")) {
+            alert("Terima kasih sudah belanja")
+            break
+        }
+    }
+
 </script>

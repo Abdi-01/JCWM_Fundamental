@@ -92,13 +92,13 @@ usiaB -= 3
 
 let waktu = new Date()
 
-console.log(waktu.getFullYear())
-console.log(waktu.getMonth()) // bulan 0-11
-console.log(waktu.getDate()) // tanggal 1-31
-console.log(waktu.getDay()) // 0-6 ->> start from sunday
-console.log(waktu.getHours()) // Jam
-console.log(waktu.getMinutes()) // Minute
-console.log(waktu.getSeconds()) // Seconds
+// console.log(waktu.getFullYear())
+// console.log(waktu.getMonth()) // bulan 0-11
+// console.log(waktu.getDate()) // tanggal 1-31
+// console.log(waktu.getDay()) // 0-6 ->> start from sunday
+// console.log(waktu.getHours()) // Jam
+// console.log(waktu.getMinutes()) // Minute
+// console.log(waktu.getSeconds()) // Seconds
 
 
 // switch (true) {

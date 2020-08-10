@@ -1,0 +1,94 @@
+<script>
+    /*
+    PR
+    1. Membuat aplikasi
+        Hal utama: 
+        1. Menu belanja dari sebelumnya
+        2. Menu belajar
+        Syaratnya :
+            - Setiap belanja dan belajar selesai, apakah mau kembali ke menu utama
+
+    2. Modul hal 16-18
+    */
+
+    //
+    let belajar = true, belanja = true, menuUtama = true
+    let hargaApel = 10000
+    let hargaJeruk = 8000
+    let hargaAlpukat = 15000
+
+    while (menuUtama) {
+        let home = prompt(`Selamat datang di Simple App:
+        1. Mau belajar
+        2. Mau belanja
+        `)
+
+        if (home === "1") {
+            while (belajar) {
+                let pilihOperasi = prompt(`Silahkan pilih operasinya : 
+       1. Penjumlahan
+       2. Pengurangan
+       3. Perkalian
+       4. Pembagian
+       `)
+                let angkaPertama, angkaKedua
+                if (pilihOperasi === "1") {
+                    angkaPertama = parseFloat(prompt("Masukkan Angka Pertama : "))
+                    angkaKedua = parseFloat(prompt("Masukkan Angka Kedua : "))
+                    alert(`Hasil penjumlahan dari ${angkaPertama} + ${angkaKedua} = ${angkaPertama + angkaKedua}`)
+                } else if (pilihOperasi === "2") {
+                    angkaPertama = parseFloat(prompt("Masukkan Angka Pertama : "))
+                    angkaKedua = parseFloat(prompt("Masukkan Angka Kedua : "))
+                    alert(`Hasil penjumlahan dari ${angkaPertama} - ${angkaKedua} = ${angkaPertama - angkaKedua}`)
+                } else if (pilihOperasi === "3") {
+                    angkaPertama = parseFloat(prompt("Masukkan Angka Pertama : "))
+                    angkaKedua = parseFloat(prompt("Masukkan Angka Kedua : "))
+                    alert(`Hasil penjumlahan dari ${angkaPertama} * ${angkaKedua} = ${angkaPertama * angkaKedua}`)
+                } else if (pilihOperasi === "4") {
+                    angkaPertama = parseFloat(prompt("Masukkan Angka Pertama : "))
+                    angkaKedua = parseFloat(prompt("Masukkan Angka Kedua : "))
+                    alert(`Hasil penjumlahan dari ${angkaPertama} / ${angkaKedua} = ${angkaPertama / angkaKedua}`)
+                } else {
+                    alert("Input anda error ⛔")
+                }
+                let confBelajar = confirm("Mau belajar lagi ?")
+                if (!confBelajar) {
+                    belajar = false
+                }
+            }
+        } else if (home === "2") {
+            while (belanja) {
+                let pilihBelanja = prompt(`Silahkan pilih barang :
+        1. Buah Apel 🍎 @Rp. 10.0000/kg
+        2. Buah Jeruk 🍊 @Rp. 8.0000/kg
+        3. Buah Alpukat 🥑 @Rp. 15.0000/kg
+        `)
+                if (pilihBelanja === "1") {
+                    let qty = parseInt(prompt("Mau beli berapa Kg Apelnya? "))
+                    alert(`Anda membeli Apel ${qty} Kg dengan total bayar ${(hargaApel * qty).toLocaleString()}`)
+                }
+                else if (pilihBelanja === "2") {
+                    let qty = parseInt(prompt("Mau beli berapa Kg Jeruknya? "))
+                    alert(`Anda membeli Jeruk ${qty} Kg dengan total bayar ${(hargaJeruk * qty).toLocaleString()}`)
+                }
+                else if (pilihBelanja === "3") {
+                    let qty = parseInt(prompt("Mau beli berapa Kg Alpukat? "))
+                    alert(`Anda membeli Alpukat ${qty} Kg dengan total bayar ${(hargaAlpukat * qty).toLocaleString()}`)
+                }
+
+                let confBelanja = confirm("Mau belanja lagi ?")
+                if (!confBelanja) {
+                    belanja = false
+                }
+            }
+        } else {
+            alert("Menu tidak ada ⛔")
+        }
+        let confMenu = confirm("Mau ke menu utama lagi ?")
+        if (!confMenu) {
+            menuUtama = false
+        }
+    }
+
+
+</script>
