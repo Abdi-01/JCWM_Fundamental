@@ -85,19 +85,19 @@ Looping : perulangan
 // }
 // console.log(symD)
 // //Triangle-2
-// console.log("\nTriangle-2")
-// var symD = ""
-// let count = 1
-// for (let i = 1; i <= 5; i++) {
-//     for (let j = 0; j < i; j++) {
-//         symD += `${count} `
-//         count++
-//     }
-//     if (i < 5) {
-//         symD += "\n"
-//     }
-// }
-// console.log(symD)
+console.log("\nTriangle-2")
+var symD = ""
+let count = 1
+for (let i = 1; i <= 5; i++) {
+    for (let j = 0; j < i; j++) {
+        symD += `${count} `
+        count++
+    }
+    if (i < 5) {
+        symD += "\n"
+    }
+}
+console.log(symD)
 // //Triangle-3
 // console.log("\nTriangle-3")
 // var symD = ""
@@ -224,17 +224,17 @@ Looping : perulangan
 //     str += "\n"
 // }
 // console.log(str)
-let str = ""
-let limit = 5
-for (let i = 1; i <= (limit * 2) - 1; i++) {
-    for (let j = 5; j >= i; j--) {
-        str += "# "
-    }
-    if (i > limit) {
-        for (let k = 1; k <= i - limit + 1; k++) {
-            str += "# "
-        }
-    }
-    str += "\n"
-}
-console.log(str)
+// let str = ""
+// let limit = 5
+// for (let i = 1; i <= (limit * 2) - 1; i++) {
+//     for (let j = 5; j >= i; j--) {
+//         str += "# "
+//     }
+//     if (i > limit) {
+//         for (let k = 1; k <= i - limit + 1; k++) {
+//             str += "# "
+//         }
+//     }
+//     str += "\n"
+// }
+// console.log(str)

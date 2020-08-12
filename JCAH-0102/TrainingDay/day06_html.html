@@ -2,31 +2,131 @@
     /*
     Tugas :
     1. Membuat aplikasi sekolah
-        - Menu utama : 
-            Registrasi, 
+        - Menu utama :
+            Registrasi,
             Cek Siswa terdaftar atau tidak dan absennya berapa,
             Menghapus siswa(input namanya)
 
-    PR : 
-    1. Market : 
+    PR :
+    1. Market :
         - Memiliki data produk, stock dan harga menngunakan array
         - Bisa menambahkan produk baru
         - Bisa melakukan update qty disetiap transaksi
         - Bila stock produk = 0, maka datanya akan dihapus dari arraynya
     */
 
-    let siswa = ["Harry", "Snap", "Bima", "Budi"]
+    //Tugas 1
 
-    alert("Selamat datang di Hogwart")
-    let menu = prompt(`1. Register\n2. Cari Siswa\n3. Hapus Siswa`)
+    // let siswa = ["Harry", "Snap", "Bima", "Budi"]
 
-    if (menu == 1) {
-        let regis = prompt(`Masukkan nama : `)
-        siswa.push(regis)
-        alert(`${regis} Sudah terdaftar\n${siswa.join('\n')}`)
-    } else if (menu == 2) {
+    // alert("Selamat datang di Hogwart")
+    // let menu = prompt(`1. Register\n2. Cari Siswa\n3. Hapus Siswa`)
 
-    } else if (menu == 3) {
+    // if (menu == 1) {
+    //     let regis = prompt(`Masukkan Nama : `)
+    //     siswa.push(regis)
+    //     alert(`${regis} Sudah terdaftar ✅\n${siswa.join('\n')}`)
+    // } else if (menu == 2) {
+    //     let search = prompt(`Cari Siswa : `)
+    //     let pencarian = ""
+    //     for (let i = 0; i < siswa.length; i++) {
+    //         if (siswa[i].toLowerCase() === search.toLowerCase()) {
+    //             pencarian += `Siswa ${siswa[i]} ✅, dengan absen ${i + 1}\n`
+    //         }
+    //     }
+    //     alert(pencarian.length > 0 ? pencarian : "Siswa Tidak ada ⛔")
+    // } else if (menu == 3) {
+    //     let hapus = prompt(`Pilih Nama Siswa : \n${siswa.join('\n')}`)
+    //     siswa.splice(siswa.indexOf(hapus), 1)
+    //     alert(`${hapus} Sudah Dihapus ✅\n${siswa.join('\n')}`)
+    // }
 
+    //Pseudocode
+    /*1. Membuat data produk, stock dan harganya
+    2. Menu utama : tambah, beli, cek barang
+    3. If menu yg dipilih tambah
+    4.      melakukan penambahan produk
+    5. else if menu beli
+    6.      memilih produk
+    7.      produk by pilihan-1= index produk
+    8.      memasukkan jumlah barang yg dibeli
+    9.      if pengecekan apakah stocknya tersedia
+    10.     else kembali ke baris 8
+    */
+
+    //PR Market
+    let produk = ["Apel", "Jeruk", "Alpukat"]
+    let stock = [10, 20, 15]
+    let harga = [10000, 5000, 15000]
+    let belanja = true
+
+    while (belanja) {
+        let listProduk = ""
+        let menu = prompt(`Selamat Datang Di Tokoku
+        1. Tambah Produk
+        2. Beli Produk
+        3. Cek Stock`)
+        if (menu == 1) {
+            let inPro = prompt(`Masukkan Nama : `)
+            let inStock = parseInt(prompt(`Masukkan Stock : `))
+            let inPrice = parseInt(prompt(`Masukkan Harga : `))
+            produk.push(inPro)
+            stock.push(inStock)
+            harga.push(inPrice)
+            let listProduk = ""
+
+            for (let i = 0; i < produk.length; i++) {
+                listProduk += `${i + 1}. ${produk[i]} Rp. ${harga[i]} stock = ${stock[i]}\n`
+            }
+
+            alert(`${inPro} Sudah terdaftar ✅\n${listProduk}`)
+        } else if (menu == 2) {
+            let qty
+
+            //untuk merender list produk
+            for (let i = 0; i < produk.length; i++) {
+                listProduk += `${i + 1}. ${produk[i]} Rp. ${harga[i]}\n`
+            }
+
+            let pilihBelanja = parseInt(prompt(`Silahkan pilih barang :\n${listProduk}`)) - 1//untuk mendapatkan index
+
+            while (true) {
+                qty = parseInt(prompt(`Beli ${produk[pilihBelanja]} berapa ?`))
+
+                if (qty <= stock[pilihBelanja]) {
+                    let totalBeli = qty * harga[pilihBelanja]
+                    let bayar = parseInt(prompt(`Total belanja anda : Rp. ${totalBeli} 
+                    Masukkan uang anda :
+                    `))
+                    stock[pilihBelanja] -= qty
+                    alert(`Kembalian anda adalah Rp. ${bayar - totalBeli}`)
+                    if (stock[pilihBelanja] === 0) {
+                        produk.splice(pilihBelanja, 1)
+                        stock.splice(pilihBelanja, 1)
+                        harga.splice(pilihBelanja, 1)
+                    }
+                    break;
+                } else {
+                    alert("Stock produk tidak cukup, isi ulang")
+                }
+            }
+        }
+        else if (menu == 3) {
+            let listProduk = ""
+
+            // for (let i = 0; i < produk.length; i++) {
+            //     listProduk += `${i + 1}. ${produk[i]} Rp. ${harga[i]} stock = ${stock[i]}\n`
+            // }
+
+                alert(`Stock Produk :\n${produk.map(function (item, index) {
+                    return `${index + 1}. ${item} Rp. ${harga[index]} stock = ${stock[index]}\n`
+                })}`)
+        } else {
+
+        }
+        if (!confirm("Ke menu utama ?")) {
+            alert("Terima kasih sudah belanja")
+            break
+        }
     }
 </script>

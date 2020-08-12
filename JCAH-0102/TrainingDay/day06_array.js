@@ -80,12 +80,51 @@ let absen = [2, 9, 10, 1]
 // console.log(daftarBaru)
 
 let mobil = ["BMW", "Ferrari", "Mustang"]
-let mobilAsia = ["Mazda", "Toyota", "Honda"]
 
 // let dftrMobil = mobil.concat(mobilAsia)
-let dftrMobil = [...mobil, ...mobilAsia] //Merging menggunakn metode distrcutering
+// let dftrMobil = [...mobil, ...mobilAsia] //Merging menggunakn metode distrcutering
 
-let mobilNew = [...mobil]
-mobilNew.pop()
-console.log(mobil)
-console.log(mobilNew)
+// let mobilNew = [...mobil]
+// mobilNew.pop()
+// console.log(mobil)
+// console.log(mobilNew)
+
+//Fungsi pada array yg sering digunakan : 
+/*
+map(), forEach(), filter(), reduce()
+*/
+let mobilAsia = ["Mazda", "Toyota", "Honda"]
+
+//MAP : untuk memproses semua item yang ada didalam array, dan memberikan nilai balik/return
+let list = mobil.map(function (item, index) {
+	return `Daftar mobil ${index + 1}. ${item}`
+})
+
+//forEach : untuk memproses semua item yang ada didalam array tetapi tidak bisa memberikan nilai balik
+let listAsia = mobilAsia.forEach(function (item, index) {
+	return `Daftar mobilAsia ${index + 1}. ${item}`
+})
+
+//Filter : untuk mencari data yang sesuai berdasarkan kondisi dan menampilkannya menjadi array baru
+let filter = mobilAsia.filter(function (item, index) {
+	return item.length > 5
+})
+
+//Reduce : berfungsi untuk menggabungkan atau menjumlah suatu data pada array
+let value = [2, 3, 4, 5]
+let rdc = value.reduce(function (val, item) {
+	return val + item
+}, 0)
+
+// console.log(rdc)
+// let str = ""
+// let count = 1
+// for (let i = 1; i <= 5; i++) {
+// 	for (let j = 1; j <= i; j++) {
+// 		str += count + " "
+// 		count++
+// 	}
+// 	str += "\n"
+// }
+
+// console.log(str)
