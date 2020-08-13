@@ -1,0 +1,76 @@
+<script>
+    /*
+    PR :
+    1. Aplikasi market sebelumnya dibuat menggunakan object dan class, render list produknya memanfaatkan fungsi
+    2. Aplikasi siswa, propertiesnya nama, kelas, nilai[90,80,70], asal sekolah
+    */
+
+    class Produk {
+        constructor(name, stock, price) {
+            this.name = name
+            this.stock = stock
+            this.price = price
+        }
+    }
+    let produk = [
+        { name: "Oreo", stock: 20, price: 10000 },
+        { name: "Kitkat", stock: 10, price: 15000 },
+        { name: "Milo", stock: 15, price: 5000 }
+    ]
+    let belanja = true
+
+    function printList() {
+        let listProduk = ""
+        produk.map((item, index) => {
+            listProduk += `${index + 1}. ${item.name} Rp. ${item.price.toLocaleString()} stock = ${item.stock}\n`
+        })
+        return listProduk
+    }
+
+    while (belanja) {
+        let listProduk = ""
+        let menu = prompt(`Selamat Datang Di Tokoku
+        1. Tambah Produk
+        2. Beli Produk
+        3. Cek Stock`)
+        if (menu == 1) {
+            let inPro = prompt(`Masukkan Nama : `)
+            let inStock = parseInt(prompt(`Masukkan Stock : `))
+            let inPrice = parseInt(prompt(`Masukkan Harga : `))
+            produk.push(new Produk(inPro, inStock, inPrice))
+
+            alert(`${inPro} Sudah terdaftar ✅\n${printList()}`)
+        } else if (menu == 2) {
+            let qty
+            let pilihBelanja = parseInt(prompt(`Silahkan pilih barang :\n${printList()}`)) - 1//untuk mendapatkan index
+
+            while (true) {
+                qty = parseInt(prompt(`Beli ${produk[pilihBelanja].name} berapa ?`))
+
+                if (qty <= produk[pilihBelanja].stock) {
+                    let totalBeli = qty * produk[pilihBelanja].price
+                    let bayar = parseInt(prompt(`Total belanja anda : Rp. ${totalBeli} 
+                    Masukkan uang anda :
+                    `))
+                    produk[pilihBelanja].stock -= qty
+                    alert(`Kembalian anda adalah Rp. ${bayar - totalBeli}`)
+                    if (produk[pilihBelanja].stock === 0) {
+                        produk.splice(pilihBelanja, 1)
+                    }
+                    break;
+                } else {
+                    alert("Stock produk tidak cukup, isi ulang")
+                }
+            }
+        }
+        else if (menu == 3) {
+            alert(`Stock Produk :\n${printList()}`)
+        } else {
+
+        }
+        if (!confirm("Ke menu utama ?")) {
+            alert("Terima kasih sudah belanja")
+            break
+        }
+    }
+</script>
