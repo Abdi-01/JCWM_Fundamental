@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMA Nusantara</title>
+</head>
+
+<body>
+    <form>
+        <input type="number" name="inLength" id="inLength" placeholder="Panjang Generate Code">
+        <!-- Nama <input type="text" name="inNama" id="inNama" placeholder="Masukkan Nama">
+        Usia <input type="number" name="inUsia" id="inUsia" placeholder="Masukkan Usia">
+        <button type="button" onclick="btSubmit()">Submit</button> -->
+        <!-- <button type="button" onclick="btSubmit()">Submit</button> -->
+        <button type="button" onclick="invoice()">Submit</button>
+    </form>
+    <h4 id="generate"></h4>
+    <!-- <h4 id="usia"></h4> -->
+</body>
+<script>
+    var karakter = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+
+    function invoice() {
+        let list = ["Coba"]
+        let genInvoice = ''
+        for (let i = 0; i < parseInt(document.getElementById("inLength").value); i++) {
+            genInvoice += karakter.charAt(Math.floor(Math.random() * karakter.length))
+        }
+        list.push(genInvoice)
+
+        // list.map((item, index) => {
+        //     return document.getElementById("generate").innerHTML = `${index + 1} Tokoku/${item} `
+        // })
+        // return genInvoice
+    }
+
+    // console.log(invoice(5))
+    // console.log(document.getElementsByTagName("form")[0])
+    // function btSubmit() {
+    //     document.getElementById("nama").innerHTML = document.getElementById("inNama").value
+    //     document.getElementById("usia").innerHTML = document.getElementById("inUsia").value
+    // }
+</script>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--Intro HTML
+	1. Bisa disebut sebagai markup language atau bahasa dokumen yang dirancang agar user memungkinkan untuk membuat struktur tampilan pada website.
+	2. HTML bukanlah bahasa pemrogaman karena tidak fungsional dan dinamis.
+	3. HTML memiliki element seperti paragraph,table,header, yang terdiri dari rangkaian TAG dan ATTRIBUTE.
+
+-->
+<html lang="en">
+
+<head>
+    <!--charset : untuk menentukan pengkodean bahasa pada interpreter-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purwadhika | Digital School</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <!--center : untuk memposisikan element HTML ditengah-->
+    <center>
+        Hello world !
+        <!--Heading untuk membuat judul 1 ukuran terbesar, 6 ukuran terkecil-->
+        <!-- <h1>Hallo Dunia 1</h1>
+        <h2>Hallo Dunia 2</h2>
+        <h3>Hallo Dunia 3</h3>
+        <h4>Hallo Dunia 4</h4>
+        <h5>Hallo Dunia 5</h5>
+        <h6>Hallo Dunia 6</h6>
+        <p>Selamat Datang di Dunia HTML</p>
+        <a href="https://www.w3schools.com/">Menuju Google</a><br />
+        <img src="https://images.unsplash.com/photo-1597265245060-dad51a9463c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+            alt="imageNotFound" width="200px" />
+        <b>Ini Bold Loh</b><br>
+        <strong>Ini Strong</strong><br>
+        <i>Ini Italic</i><br>
+        <em>Ini emphasized</em><br>
+        <mark>Ini marked</mark><br>
+        <small>Ini Small</small><br>
+        <del>Ini deleted</del><br>
+        <ins>Ini inserted</ins><br>
+        A<sub>Ini Subscript</sub><br>
+        B<sup>Ini Superscript</sup><br> -->
+        <!-- <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Produk</th>
+                    <th>Stock</th>
+                    <th>Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Milo</td>
+                    <td>20</td>
+                    <td>5000</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Oreo</td>
+                    <td>30</td>
+                    <td>10000</td>
+                </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table> -->
+    </center>
+    <div id="listBarang">
+
+    </div>
+</body>
+<script>
+    let produk = ["Apel", "Mangga", "Jeruk"]
+    let text = ''
+    produk.map((item, index) => {
+        text += `<h3>${index + 1}. ${item}</h3>`
+    })
+    document.getElementById("listBarang").innerHTML = text
+</script>
+
+</html>
