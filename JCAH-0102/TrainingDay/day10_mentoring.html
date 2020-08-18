@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Poin</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="formdata">
+        Nama : <input type="text" id="nama" /><br />
+        Usia : <input type="number" id="usia" /><br />
+        Gender : <input type="radio" id="g1" name="gender" value="Pria" >Pria</input>
+        <input type="radio" name="gender"  id="g2" value="Wanita">Wanita</input>
+    </form>
+    <button type="button" onclick="getNama()">Ok</button>
+    <p id="output"></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Usia</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody id="tbData">
+
+        </tbody>
+    </table>
+    <!-- <center>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Club</th>
+                    <th>Logo</th>
+                    <th>Function</th>
+                    <th>Level</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1<sup>st</sup></td>
+                    <td>Manchester United</td>
+                    <td><img src="https://upload.wikimedia.org/wikipedia/id/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png"
+                            width="75px"></td>
+                    <td>2x<sup>3</sup>+3x<sup>2</sup>-x-13 = 0</td>
+                    <td>
+                        <input type="radio" value="Junior" name="level">Junior</input>
+                        <input type="radio" value="Profesional" name="level">Profesional</input>
+                    </td>
+                    <td><button>Edit</button></td>
+                </tr>
+                <tr>
+                    <td>2<sup>nd</sup></td>
+                    <td>Real Madrid</td>
+                    <td><img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png"
+                            width="75px"></td>
+                    <td>2x<sup>3</sup>+3x<sup>2</sup>-x-13 = 0</td>
+                    <td>
+                        <input type="radio" value="Junior" name="level2">Junior</input>
+                        <input type="radio" value="Profesional" name="level2">Profesional</input>
+                    </td>
+                    <td><button>Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </center> -->
+</body>
+<script>
+    let dbDataSiswa = []
+    function getNama() {
+        let form = document.getElementById("formdata")
+        dbDataSiswa.push({ nama: form.elements[0].value, usia: parseInt(form.elements[1].value), gender: form.elements["gender"].value })
+        printData()
+    }
+
+    function printData() {
+        let print = ''
+        dbDataSiswa.forEach((item, index) => {
+            print += `<tr>
+            <td>${item.nama}</td>
+            <td>${item.usia}</td>
+            <td>${item.gender}</td>
+            </tr>`
+        })
+        document.getElementById("tbData").innerHTML = print
+    }
+
+</script>
+
+</html>

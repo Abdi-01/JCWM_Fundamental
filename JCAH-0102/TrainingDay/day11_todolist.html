@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        .container {
+            margin-top: 10%;
+            width: 70%;
+            height: 50vh;
+            background-color: #0984e3;
+            padding: 20px;
+        }
+
+        form {
+            margin-top: 10;
+        }
+
+        table,
+        th,
+        td,
+        tr {
+            border: 1px solid white;
+            border-collapse: collapse;
+            padding: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="container">
+            <h3>Kegiatan Selama Pandemi</h3>
+            <form>
+                <label>Kapan ?</label>
+                <input type="date" id="waktu" />
+                <label>Ngapain ?</label>
+                <input type="text" id="kegiatan" />
+                <label>Dimana ?</label>
+                <input type="text" id="gambar" />
+                <input type="button" value="Tambah" onclick="addKegiatan()" />
+            </form>
+            <table style="margin-top:10px ;">
+                <thead>
+                    <th style="width: 80px;">Checklist</th>
+                    <th style="width: 80px;">Waktu</th>
+                    <th style="width: 200px;">Kegiatan</th>
+                    <th style="width: 400px;">Detail</th>
+                    <th style="width: 120px;">Setting</th>
+                </thead>
+                <tbody id="tbKegiatan">
+                </tbody>
+            </table>
+        </div>
+    </center>
+</body>
+<script>
+    var data = []
+    var htmlElement = ''
+
+    class kegiatan {
+        constructor(_waktu, _kegiatan, _detail) {
+            this.waktu = _waktu,
+                this.kegiatan = _kegiatan,
+                this.detail = _detail
+        }
+    }
+
+    function addKegiatan() {
+        var Waktu = document.getElementById('waktu').value
+        var Kegiatan = document.getElementById('kegiatan').value
+        var gambar = document.getElementById('gambar').value
+
+        data.push(new kegiatan(Waktu, Kegiatan, gambar))
+        console.log(data)
+        console.log(htmlElement)
+        printKegiatan()
+    }
+
+    function remove(index) {
+        data.splice(index, 1)
+        printKegiatan()
+    }
+
+    function edit(index) {
+        data[index].waktu = prompt('Edit waktu', data[index].waktu)
+        data[index].kegiatan = prompt('Edit kegiatan', data[index].kegiatan)
+        data[index].detail = prompt('Edit detail', data[index].detail)
+        printKegiatan()
+    }
+
+    function printKegiatan() {
+        htmlElement = ''
+        data.forEach((item, index) => {
+            htmlElement += `
+            <tr>
+                <td>${index+1}</td>
+                <td>${item.waktu}</td>
+                <td>${item.kegiatan}</td>
+                <td><img src="${item.detail}" alt="gambar" width="200px" /> </td>
+                <td><input type="button" value="Edit" onclick="edit(${index})" /><input type="button" value="Hapus" onclick="remove(${index})" /></td>
+            </tr>`
+        })
+        document.getElementById('tbKegiatan').innerHTML = htmlElement
+    }
+</script>
+
+</html>

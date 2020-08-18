@@ -80,3 +80,25 @@ let angkaCari = angka.filter((item) => item == 2)
 
 console.log(angkaNew)
 console.log(angkaCari)
+
+//Array
+let arr = [[10, 2, 3], ["A", "B", "C"], { nama: "Andi", usia: 8 }]
+let nilai = [90, 80, 70]
+//DUplikasi Array
+let produk = ["Sepatu", "Kaos", "Jaket"]
+// let produkNew = [...produk]
+
+//concatination atau penggabungan
+let newArr = nilai.concat(produk)
+let newArrB = [...nilai, ...produk]
+console.log(newArr)
+console.log(newArrB)
+
+//Fungsi yg sering dipakai didalam array
+//PUSH,SPLICE,SORT,MAP,forEach
+
+
+//Object
+let coba = { name: "Aldo", usia: 25, negara: "INA" }
+console.log(coba.usia)
+console.log(coba["usia"])
