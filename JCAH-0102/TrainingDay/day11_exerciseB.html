@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pendataan Warga</title>
+    <style>
+        table,
+        th,
+        td,
+        tr {
+            border: 2px solid blue;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h3>Daftar Siswa Purwadhika</h3>
+        <table style="size: 200px; width: 300px;">
+            <tr>
+                <td>
+                    <form id='inform' style="padding: 10px;">
+                        <input type="text" id="namaDepan" placeholder="Nama Depan"><br>
+                        <input type="text" id="namaBelakang" placeholder="Nama Belakang"><br>
+                        <input type="text" id="phone" placeholder="Phone"><br>
+                        <input type="email" id="email" placeholder="Email"><br>
+                        <br><input type="number" id="usia" placeholder="Usia"><br>
+                        <h4>Gender <input type="radio" name="Gender" value="Pria" id="pria">Pria</input>
+                            <input type="radio" name="Gender" value="Wanita" id="wanita">Wanita</input></h4>
+                        <select id="pekerjaan">
+                            <option value="Buruh" selected>Buruh</option>
+                            <option value="PNS">PNS</option>
+                            <option value="Wirausaha">Wirausaha</option>
+                        </select>
+                        <br>
+                        <br><button type="button" onclick="tambahData()">Submit</button><br>
+                    </form>
+                </td>
+            </tr>
+        </table><br>
+        <table name="htabel" style="width: 300px;">
+            <thead>
+                <th>Nama Lengkap</th>
+                <th>Usia</th>
+                <th>Gender</th>
+                <th>Pekerjaan</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Action</th>
+            </thead>
+            <tbody id='tHasil'>
+
+            </tbody>
+        </table>
+    </center>
+</body>
+<script>
+    let data = []
+    class ambilData {
+        constructor(namaDpn, namaBlk, usia, gender, pekerjaan, phone, email) {
+            this.nama = namaDpn + ' ' + namaBlk
+            this.usia = usia
+            this.gender = gender
+            this.pekerjaan = pekerjaan
+            this.phone = phone
+            this.email = email
+        }
+    }
+
+    function tambahData() {
+        let form = document.getElementById("inform");
+        let namadepan = form.elements[0].value
+        let namabelakang = form.elements[1].value
+        let usia = form.elements[1].value
+        let gender = form.elements['Gender'].value
+        let pekerjaan = form.elements[4].value
+        let phone = document.getElementById("phone").value
+        let emailData = document.getElementById("email").value
+        let emailValidity = document.getElementById("email").validity.valid
+        if (emailValidity && emailData.includes("@")) {
+            data.push(new ambilData(namadepan, namabelakang, usia, gender, pekerjaan, phone, emailData))
+            console.log(data)
+        } else {
+            alert("Your email not validate")
+        }
+        document.getElementById("namaDepan").value = ''
+        document.getElementById("namaBelakang").value = ''
+        document.getElementById("usia").value = ''
+        document.getElementById("pekerjaan").value = 'Buruh'
+        document.getElementById('pria').checked = false;
+        document.getElementById('wanita').checked = false;
+        document.getElementById("phone").value = ''
+        document.getElementById("email").value = ''
+
+        cetakData()
+    }
+
+    function remove(index) {
+        data.splice(index, 1)
+        cetakData()
+    }
+
+    function cetakData() {
+        let HTML = ''
+        for (let i = 0; i < data.length; i++) {
+            HTML += `<tr>
+                    <td>${data[i].nama}</td>
+                    <td>${data[i].usia}</td>
+                    <td>${data[i].gender}</td>
+                    <td>${data[i].pekerjaan}</td>
+                    <td>${data[i].phone}</td>
+                    <td>${data[i].email}</td>
+                    <td>
+                        <input type="button" value="Edit" onclick="edit(${i})" />
+                        <input type="button" value="Hapus" onclick="remove(${i})" />
+                    </td>
+                </tr>`
+        }
+        document.getElementById("tHasil").innerHTML = HTML;
+    }
+</script>
+
+</html>

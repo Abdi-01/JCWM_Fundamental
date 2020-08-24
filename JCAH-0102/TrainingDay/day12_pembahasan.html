@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pendataan Warga</title>
+    <style>
+        table,
+        th,
+        td,
+        tr {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <fieldset style="width: 20vw;height: 250px;">
+            <legend>Form Pendataan Warga</legend>
+            <form id="formWarga">
+                <input type="text" id="foto" placeholder="Foto" /><br /><br />
+                <input type="text" id="namaDpn" placeholder="Nama Depan" />
+                <input type="text" id="namaBlk" placeholder="Nama Belakang" />
+                <input type="text" id="phone" placeholder="No. Hp" />
+                <input type="email" id="email" placeholder="Email" />
+                <input type="radio" name="Gender" value="Pria" checked>Pria</input>
+                <input type="radio" name="Gender" value="Wanita">Wanita</input><br />
+                <select id="pekerjaan">
+                    <option value="Petani" selected>Petani</option>
+                    <option value="PNS">PNS</option>
+                    <option value="Wirausaha">Wirausaha</option>
+                </select><br />
+                <textarea id="alamat" placeholder="Alamat"></textarea>
+            </form>
+            <button type="button" onclick="addData()">Submit Data</button>
+        </fieldset>
+        <table>
+            <thead>
+                <th>No</th>
+                <th>Foto</th>
+                <th>Nama Lengkap</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Pekerjaan</th>
+                <th>Alamat</th>
+                <th>Action</th>
+            </thead>
+            <tbody id="printTb"> </tbody>
+        </table>
+    </center>
+</body>
+<script>
+
+    let dbWarga = []
+
+    class FormWarga {
+        constructor(foto, namaDpn, namaBlk, phone, email, gender, pekerjaan, alamat) {
+            this.foto = foto
+            this.nama = namaDpn + ' ' + namaBlk
+            this.phone = phone
+            this.email = email
+            this.gender = gender
+            this.pekerjaan = pekerjaan
+            this.alamat = alamat
+        }
+    }
+
+    function addData() {
+        let form = document.getElementById("formWarga")
+        console.log(form)
+        let foto = form.elements[0].value
+        let namaDpn = form.elements[1].value
+        let namaBlk = form.elements[2].value
+        let phone = form.elements[3].value
+        let email = form.elements[4].value
+        let gender = form.elements["Gender"].value
+        let pekerjaan = document.getElementById("pekerjaan").value
+        let alamat = form.elements[8].value
+
+        if (email.includes('@')) {
+            dbWarga.push(new FormWarga(foto, namaDpn, namaBlk, phone, email, gender, pekerjaan, alamat))
+        } else {
+            alert("Email anda salah")
+        }
+        printData()
+    }
+
+    function printData() {
+        let elementData = ''
+        dbWarga.forEach((item, index) => {
+            elementData += `<tr>
+                <td >${index + 1}</td>
+                <td id="image${index}"><img src="${item.foto}" width="80px"/></td>
+                <td id="nama${index}">${item.nama}</td>
+                <td id="phone${index}">${item.phone}</td>
+                <td id="email${index}">${item.email}</td>
+                <td id="gender${index}">${item.gender}</td>
+                <td id="pekerjaan${index}">${item.pekerjaan}</td>
+                <td id="alamat${index}">${item.alamat}</td>
+                <td id="action${index}"><button type="button" onclick="editData(${index})">Edit</button><button type="button" onclick="removeData(${index})">Hapus</button></td>
+                </tr>`
+        })
+
+        document.getElementById("printTb").innerHTML = elementData
+    }
+
+    function removeData(ind) {
+        dbWarga.splice(ind, 1)
+        printData()
+    }
+
+    editData = idx => {
+        printData()
+
+        document.getElementById(`image${idx}`).innerHTML = `<input type="text" id="newFoto" value=${dbWarga[idx].foto} placeholder="Foto" />`
+        document.getElementById(`nama${idx}`).innerHTML = `<input type="text" id="newNama" value=${dbWarga[idx].nama} placeholder="Nama" />`
+        document.getElementById(`phone${idx}`).innerHTML = `<input type="text" id="newPhone" value=${dbWarga[idx].phone} placeholder="Phone" />`
+        document.getElementById(`email${idx}`).innerHTML = `<input type="email" id="newEmail" value=${dbWarga[idx].email} placeholder="Email" />`
+        document.getElementById(`gender${idx}`).innerHTML = `<input type="radio" name="newGender" value="Pria" checked>Pria</input>
+        <input type="radio" name="newGender" value="Wanita" >Wanita</input>`
+        document.getElementById(`pekerjaan${idx}`).innerHTML = `<select id="newPekerjaan">
+                    <option value="Petani" selected=${dbWarga[idx].pekerjaan == "Petani" ? "true" : "false"}>Petani</option>
+                    <option value="PNS" selected=${dbWarga[idx].pekerjaan == "PNS" ? "true" : "false"}>PNS</option>
+                    <option value="Wirausaha" selected=${dbWarga[idx].pekerjaan == "Wirausaha" ? "true" : "false"}>Wirausaha</option>
+                </select>`
+        document.getElementById(`alamat${idx}`).innerHTML = `<input type="text" id="newAlamat" value=${dbWarga[idx].alamat} placeholder="Email" />`
+        document.getElementById(`action${idx}`).innerHTML = `<button type="button" onclick="save(${idx})">Simpan</button><button type="button" onclick="cancel()">Cancel</button>`
+    }
+
+    function save(index) {
+        let new_foto = document.getElementById('newFoto').value
+        console.log(new_foto)
+        dbWarga[idx].foto = new_foto
+    }
+
+    function cancel() {
+        printData()
+    }
+    // editData = idx => {
+    //     for (let key in dbWarga[idx]) {
+    //         dbWarga[idx][key] = prompt(`Edit ${key}`, dbWarga[idx][key])
+    //     }
+    //     printData()
+    // }
+
+    printData()
+</script>
+
+</html>

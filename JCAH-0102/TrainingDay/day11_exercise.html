@@ -5,12 +5,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table,
+        th,
+        td,
+        tr {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 
 <body>
+    <fieldset style="width: 400px;">
+        <legend>Warga</legend>
+        <table>
+            <thead>
+                <th>Antrian</th>
+                <th>Nama</th>
+                <th>Asal</th>
+                <th>Tujuan</th>
+                <th>Action</th>
+            </thead>
+            <tbody id="printWarga">
+
+            </tbody>
+            <tfoot>
+                <th></th>
+                <th><input type="text" id="nama" /></th>
+                <th><input type="text" id="asal" /></th>
+                <th><input type="text" id="tujuan" /></th>
+                <th><button type="button" onclick="getData()">Submit</button></th>
+            </tfoot>
+        </table>
+    </fieldset>
+    <fieldset style="width: 400px;">
+        <legend>Warga Rapid</legend>
+        <table>
+            <thead>
+                <th>Antrian</th>
+                <th>Nama</th>
+                <th>Asal</th>
+                <th>Tujuan</th>
+                <th>Action</th>
+            </thead>
+            <tbody id="printWargaRapid">
+
+            </tbody>
+        </table>
+    </fieldset>
 
 </body>
 <script>
+
+    class Warga {
+        constructor(_antrian, _nama, _asal, _tujuan) {
+            this.antrian = _antrian
+            this.nama = _nama
+            this.asal = _asal
+            this.tujuan = _tujuan
+        }
+    }
+
+    //array of object 
+    let dbWarga = [
+        new Warga("12AS", "Andi", "Solo", "Bali"),
+        new Warga("34HL", "Edo", "Bali", "Jakarta"),
+        { antrian: "YH5R", nama: "Bimo", asal: "Cirebon", tujuan: "Bandung" }
+    ]
+    let dbRapid = [], dbPositif = [], dbNegatif = []
+
+    //membuat fungsi print data
+    showData = () => {
+        let htmlData = ''
+        for (let i = 0; i < dbWarga.length; i++) {
+            htmlData += `<tr>
+                <td>${dbWarga[i].antrian}</td>
+                <td>${dbWarga[i].nama}</td>
+                <td>${dbWarga[i].asal}</td>
+                <td>${dbWarga[i].tujuan}</td>
+                <td><button type="button" onclick="toRapid(${i})">Rapid Test</button></td>
+                </tr>`
+        }
+
+        document.getElementById("printWarga").innerHTML = htmlData
+    }
+    showDataRapid = () => {
+        let htmlData = ''
+        for (let i = 0; i < dbRapid.length; i++) {
+            htmlData += `<tr>
+                <td>${dbRapid[i].antrian}</td>
+                <td>${dbRapid[i].nama}</td>
+                <td>${dbRapid[i].asal}</td>
+                <td>${dbRapid[i].tujuan}</td>
+                <td>
+                    <select>
+                    <option value="Positif" selected>Positif</option>
+                    <option value="Negatif">Negatif</option>
+                    </select>
+                    </td>
+                </tr>`
+        }
+
+        document.getElementById("printWargaRapid").innerHTML = htmlData
+    }
+
+    //menjalankan fungsi print data
+    showData()
+
+    getData = () => {
+        let nama = document.getElementById("nama").value
+        let asal = document.getElementById("asal").value
+        let tujuan = document.getElementById("tujuan").value
+
+        console.log("Get data :", nama, asal, tujuan)
+    }
+
+    toRapid = (idx) => {
+        dbRapid.push(dbWarga[idx])
+        dbWarga.splice(idx, 1)
+        showData()
+        showDataRapid()
+    }
+
+    //latihan
+    // 1. Membuat form pendataan Warga
+    // 2. Datanya : foto,nama depan(input type=text), nama belakang(input type=text), no.hp(input type=text), email(input type=text/email), gender(input type=radio), pekerjaan(pns,wirausaha,buruh)(input select option), alamat(input type=text/textarea)
+    // Requirement : butuh tempat input data, butuh button utk submit data/delete/edit, output untuk menampilkan data menggunakan table
 
 </script>
 
