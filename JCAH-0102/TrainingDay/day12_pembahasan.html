@@ -18,12 +18,25 @@
 
 <body>
     <center>
+        <fieldset style="width: 20vw;height: 100px;">
+            <legend>Search</legend>
+            <input type="text" id="search" placeholder="Cari " />
+            <button type="button" onclick="searchData()">Cari</button><br>
+            <input type="number" id="minUsia" placeholder="Min. Usia " />
+            <input type="number" id="maxUsia" placeholder="Max. Usia " />
+            <button type="button" onclick="searchUsia()">Cari Usia</button>
+        </fieldset>
+        <fieldset style="width: 20vw;height: 30px;">
+            <legend>Sort</legend>
+            <button type="button" onclick="sortNama()">Nama</button>
+        </fieldset>
         <fieldset style="width: 20vw;height: 250px;">
             <legend>Form Pendataan Warga</legend>
             <form id="formWarga">
                 <input type="text" id="foto" placeholder="Foto" /><br /><br />
                 <input type="text" id="namaDpn" placeholder="Nama Depan" />
                 <input type="text" id="namaBlk" placeholder="Nama Belakang" />
+                <input type="number" id="usia" placeholder="Usia" />
                 <input type="text" id="phone" placeholder="No. Hp" />
                 <input type="email" id="email" placeholder="Email" />
                 <input type="radio" name="Gender" value="Pria" checked>Pria</input>
@@ -42,6 +55,7 @@
                 <th>No</th>
                 <th>Foto</th>
                 <th>Nama Lengkap</th>
+                <th>Usia</th>
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Gender</th>
@@ -58,9 +72,10 @@
     let dbWarga = []
 
     class FormWarga {
-        constructor(foto, namaDpn, namaBlk, phone, email, gender, pekerjaan, alamat) {
+        constructor(foto, namaDpn, namaBlk, usia, phone, email, gender, pekerjaan, alamat) {
             this.foto = foto
             this.nama = namaDpn + ' ' + namaBlk
+            this.usia = usia
             this.phone = phone
             this.email = email
             this.gender = gender
@@ -70,71 +85,115 @@
     }
 
     function addData() {
+        //mengakses tag form berdasarkan id
         let form = document.getElementById("formWarga")
-        console.log(form)
+        // console.log(form) : untuk mengecek index element yang ada didalam tag form
+        //form.elements[index] : mengambil data dari index element input yang ada didalam tag element form 
         let foto = form.elements[0].value
         let namaDpn = form.elements[1].value
         let namaBlk = form.elements[2].value
-        let phone = form.elements[3].value
-        let email = form.elements[4].value
+        let usia = form.elements[3].value
+        let phone = form.elements[4].value
+        let email = form.elements[5].value
         let gender = form.elements["Gender"].value
         let pekerjaan = document.getElementById("pekerjaan").value
-        let alamat = form.elements[8].value
+        let alamat = form.elements[9].value
 
         if (email.includes('@')) {
-            dbWarga.push(new FormWarga(foto, namaDpn, namaBlk, phone, email, gender, pekerjaan, alamat))
+            dbWarga.push(new FormWarga(foto, namaDpn, namaBlk, usia, phone, email, gender, pekerjaan, alamat))
         } else {
             alert("Email anda salah")
         }
         printData()
     }
 
-    function printData() {
+    function printData(idx, data = dbWarga) {
+        //variable untuk menampung string elemen
         let elementData = ''
-        dbWarga.forEach((item, index) => {
-            elementData += `<tr>
+        //data didapat dari parameter, dengan value default dari variable dbWarga
+        data.forEach((item, index) => {
+            //jika idx memiliki nilai, dan nilainya sama dengan index pada forEach
+            //maka yang dicetak pada kolom table berupa form inputan untuk melakukan edit
+            if (index == idx) {
+                elementData += `<tr>
                 <td >${index + 1}</td>
-                <td id="image${index}"><img src="${item.foto}" width="80px"/></td>
-                <td id="nama${index}">${item.nama}</td>
-                <td id="phone${index}">${item.phone}</td>
-                <td id="email${index}">${item.email}</td>
-                <td id="gender${index}">${item.gender}</td>
-                <td id="pekerjaan${index}">${item.pekerjaan}</td>
-                <td id="alamat${index}">${item.alamat}</td>
-                <td id="action${index}"><button type="button" onclick="editData(${index})">Edit</button><button type="button" onclick="removeData(${index})">Hapus</button></td>
+                <td ><input type="text" id="newFoto" value=${item.foto} placeholder="Foto" /></td>
+                <td ><input type="text" id="newNama" value=${item.nama} placeholder="Nama" /></td>
+                <td ><input type="number" id="newUsia" value=${item.usia} placeholder="Usia" /></td>
+                <td ><input type="text" id="newPhone" value=${item.phone} placeholder="Phone" /></td>
+                <td ><input type="email" id="newEmail" value=${item.email} placeholder="Email" /></td>
+                <td><input type="radio" name="newGender" value="Pria" ${item.gender == "Pria" ? "checked" : null} >Pria</input>
+                <input type="radio" name="newGender" value="Wanita" ${item.gender == "Wanita" ? "checked" : null}>Wanita</input></td>
+                <td ><select id="newPekerjaan">
+                    <option value="Petani" ${item.pekerjaan == "Petani" ? "selected" : null}>Petani</option>
+                    <option value="PNS" ${item.pekerjaan == "PNS" ? "selected" : null}>PNS</option>
+                    <option value="Wirausaha" ${item.pekerjaan == "Wirausaha" ? "selected" : null}>Wirausaha</option>
+                    </select></td>
+                <td ><input type="text" id="newAlamat" value=${dbWarga[idx].alamat} placeholder="Email" /></td>
+                <td ><button type="button" onclick="save(${idx})">Simpan</button><button type="button" onclick="cancel()">Cancel</button></td>
                 </tr>`
+            } else {
+                elementData += `<tr>
+                <td >${index + 1}</td>
+                <td ><img src="${item.foto}" width="80px"/></td>
+                <td>${item.nama}</td>
+                <td >${item.usia}</td>
+                <td >${item.phone}</td>
+                <td >${item.email}</td>
+                <td >${item.gender}</td>
+                <td >${item.pekerjaan}</td>
+                <td >${item.alamat}</td>
+                <td ><button type="button" onclick="editData(${index})">Edit</button><button type="button" onclick="removeData(${index})">Hapus</button></td>
+                </tr>`
+            }
         })
 
         document.getElementById("printTb").innerHTML = elementData
     }
 
     function removeData(ind) {
-        dbWarga.splice(ind, 1)
+        //Cara 1
+        // dbWarga.splice(ind, 1)
+
+        //Cara 2
+        dbWarga = dbWarga.filter((item, index) => {
+            return index != ind
+        })
+
         printData()
     }
 
     editData = idx => {
-        printData()
-
-        document.getElementById(`image${idx}`).innerHTML = `<input type="text" id="newFoto" value=${dbWarga[idx].foto} placeholder="Foto" />`
-        document.getElementById(`nama${idx}`).innerHTML = `<input type="text" id="newNama" value=${dbWarga[idx].nama} placeholder="Nama" />`
-        document.getElementById(`phone${idx}`).innerHTML = `<input type="text" id="newPhone" value=${dbWarga[idx].phone} placeholder="Phone" />`
-        document.getElementById(`email${idx}`).innerHTML = `<input type="email" id="newEmail" value=${dbWarga[idx].email} placeholder="Email" />`
-        document.getElementById(`gender${idx}`).innerHTML = `<input type="radio" name="newGender" value="Pria" checked>Pria</input>
-        <input type="radio" name="newGender" value="Wanita" >Wanita</input>`
-        document.getElementById(`pekerjaan${idx}`).innerHTML = `<select id="newPekerjaan">
-                    <option value="Petani" selected=${dbWarga[idx].pekerjaan == "Petani" ? "true" : "false"}>Petani</option>
-                    <option value="PNS" selected=${dbWarga[idx].pekerjaan == "PNS" ? "true" : "false"}>PNS</option>
-                    <option value="Wirausaha" selected=${dbWarga[idx].pekerjaan == "Wirausaha" ? "true" : "false"}>Wirausaha</option>
-                </select>`
-        document.getElementById(`alamat${idx}`).innerHTML = `<input type="text" id="newAlamat" value=${dbWarga[idx].alamat} placeholder="Email" />`
-        document.getElementById(`action${idx}`).innerHTML = `<button type="button" onclick="save(${idx})">Simpan</button><button type="button" onclick="cancel()">Cancel</button>`
+        printData(idx)
+        //Cara 1 : mengakses id colom pada table, dan menggantinya menjadi form input
+        // document.getElementById(`image${idx}`).innerHTML = `<input type="text" id="newFoto" value=${dbWarga[idx].foto} placeholder="Foto" />`
+        // document.getElementById(`nama${idx}`).innerHTML = `<input type="text" id="newNama" value=${dbWarga[idx].nama} placeholder="Nama" />`
+        // document.getElementById(`phone${idx}`).innerHTML = `<input type="text" id="newPhone" value=${dbWarga[idx].phone} placeholder="Phone" />`
+        // document.getElementById(`email${idx}`).innerHTML = `<input type="email" id="newEmail" value=${dbWarga[idx].email} placeholder="Email" />`
+        // document.getElementById(`gender${idx}`).innerHTML = `<input type="radio" name="newGender" value="Pria" checked>Pria</input>
+        // <input type="radio" name="newGender" value="Wanita" >Wanita</input>`
+        // document.getElementById(`pekerjaan${idx}`).innerHTML = `<select id="newPekerjaan">
+        //             <option value="Petani" selected=${dbWarga[idx].pekerjaan == "Petani" ? "true" : "false"}>Petani</option>
+        //             <option value="PNS" selected=${dbWarga[idx].pekerjaan == "PNS" ? "true" : "false"}>PNS</option>
+        //             <option value="Wirausaha" selected=${dbWarga[idx].pekerjaan == "Wirausaha" ? "true" : "false"}>Wirausaha</option>
+        //         </select>`
+        // document.getElementById(`alamat${idx}`).innerHTML = `<input type="text" id="newAlamat" value=${dbWarga[idx].alamat} placeholder="Email" />`
+        // document.getElementById(`action${idx}`).innerHTML = `<button type="button" onclick="save(${idx})">Simpan</button><button type="button" onclick="cancel()">Cancel</button>`
     }
 
-    function save(index) {
-        let new_foto = document.getElementById('newFoto').value
-        console.log(new_foto)
-        dbWarga[idx].foto = new_foto
+    function save(idx) {
+        dbWarga[idx] = {
+            foto: document.getElementById("newFoto").value,
+            nama: document.getElementById("newNama").value,
+            usia: parseInt(document.getElementById("newUsia").value),
+            phone: document.getElementById("newPhone").value,
+            email: document.getElementById("newEmail").value,
+            gender: document.getElementsByName("newGender")[0].checked ? document.getElementsByName("newGender")[0].value : document.getElementsByName("newGender")[1].value,
+            pekerjaan: document.getElementById("newPekerjaan").value,
+            alamat: document.getElementById("newAlamat").value
+        }
+
+        printData()
     }
 
     function cancel() {
@@ -145,6 +204,51 @@
     //         dbWarga[idx][key] = prompt(`Edit ${key}`, dbWarga[idx][key])
     //     }
     //     printData()
+    // }
+
+    searchData = () => {
+        //mengambil data dari element id "search"
+        let inSearch = document.getElementById("search").value
+        console.log(inSearch)
+        //filternNama : variable yg digunakan untuk menampung array baru hasil filter
+        //fungsi array.filter() merupakan sebuah fungsi bawaan array untuk melakukan filtering data, cukup masukkan condition yg diinginkan pada return didalamnya
+        let filterNama = dbWarga.filter((item, index) => {
+            let itemLower = item.nama.toLowerCase()
+            let itemPekerjaanLower = item.pekerjaan.toLowerCase()
+            let itemAlamatLower = item.alamat.toLowerCase()
+            let inputLower = inSearch.toLowerCase()
+            //⬇⬇⬇⬇ return dari fungsi filter yg disematkan condition
+            return itemLower.includes(inputLower) || itemPekerjaanLower.includes(inputLower) || itemAlamatLower.includes(inputLower)
+        })
+        console.log(filterNama)
+        printData(null, filterNama)
+    }
+
+    sortNama = () => {
+        let sortNama = dbWarga.sort((a, b) => {
+            if (a.nama < b.nama) { return -1 }
+            if (a.nama > b.nama) { return 1 }
+            return 0
+        })
+        console.log(sortNama)
+        printData(null, sortNama)
+    }
+
+    searchUsia = () => {
+        let minUsia = document.getElementById("minUsia").value
+        let maxUsia = document.getElementById("maxUsia").value
+        let filterUsia = dbWarga.filter((item, index) => {
+            return item.usia > minUsia && item.usia < maxUsia
+        })
+        console.log(filterUsia)
+        printData(null,filterUsia)
+
+    }
+    // filterName = () => {
+    //     let dataFilter = dbWarga.filter((item, index) => {
+    //         return item.nama.toLowerCase().includes("nova")
+    //     })
+    //     console.log(dataFilter)
     // }
 
     printData()
