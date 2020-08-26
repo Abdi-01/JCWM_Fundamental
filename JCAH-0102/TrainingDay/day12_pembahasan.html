@@ -28,7 +28,7 @@
         </fieldset>
         <fieldset style="width: 20vw;height: 30px;">
             <legend>Sort</legend>
-            <button type="button" onclick="sortNama()">Nama</button>
+            <button type="button" onclick="sortNama('desc')">Nama</button>
         </fieldset>
         <fieldset style="width: 20vw;height: 250px;">
             <legend>Form Pendataan Warga</legend>
@@ -182,6 +182,7 @@
     }
 
     function save(idx) {
+
         dbWarga[idx] = {
             foto: document.getElementById("newFoto").value,
             nama: document.getElementById("newNama").value,
@@ -224,11 +225,17 @@
         printData(null, filterNama)
     }
 
-    sortNama = () => {
+    sortNama = (data) => {
         let sortNama = dbWarga.sort((a, b) => {
-            if (a.nama < b.nama) { return -1 }
-            if (a.nama > b.nama) { return 1 }
-            return 0
+            if (data == "asc") {
+                if (a.nama < b.nama) { return -1 }
+                if (a.nama > b.nama) { return 1 }
+                return 0
+            } else if(data=="desc") {
+                if (a.nama > b.nama) { return -1 }
+                if (a.nama < b.nama) { return 1 }
+                return 0
+            }
         })
         console.log(sortNama)
         printData(null, sortNama)
@@ -241,7 +248,7 @@
             return item.usia > minUsia && item.usia < maxUsia
         })
         console.log(filterUsia)
-        printData(null,filterUsia)
+        printData(null, filterUsia)
 
     }
     // filterName = () => {

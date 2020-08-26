@@ -1,0 +1,17 @@
+Requirement User : 
+1. Register User ✅
+    - proteksi jika kondisi form kosong
+    - proteksi jika email tidak mengandung @
+    - proteksi jika password < 8
+2. Login User
+3. Data : username, password, email, role(admin,user) => class constructor
+
+Requirement Product :
+1. Menambah Product
+2. Menghapus Product
+3. Mengedit Product
+4. Melihat Product
+
+Requirement Transaksi :
+1. User Beli, tambah ke cart/keranjang
+2. User Bayar

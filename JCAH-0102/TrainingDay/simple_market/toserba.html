@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toserba | Semua Barang Ada</title>
+</head>
+
+<body>
+    <div>
+        <fieldset id="menu-page" style="width: 30vw;">
+            <legend>Pilih Menu</legend>
+            <button type="button" onclick="btMenu('login')">Masuk</button>
+            <button type="button" onclick="btMenu('regis')">Registrasi</button>
+        </fieldset>
+        <fieldset id="regis-page" style="width: 50vw;">
+            <legend>Register</legend>
+            <form id="formRegister">
+                <input type="text" id="regisName" placeholder="Masukkan Nama" />
+                <input type="email" id="regisEmail" placeholder="Masukkan Email" />
+                <input type="password" id="regisPass" placeholder="Masukkan Password" />
+                <button type="button" onclick="btRegis()">Daftar</button>
+            </form>
+        </fieldset>
+        <fieldset id="login-page" style="width: 50vw;">
+            <legend>Masuk</legend>
+            <form>
+                <input type="text" id="loginName" placeholder="Masukkan Nama" />
+                <input type="password" id="loginPass" placeholder="Masukkan Password" />
+            </form>
+            <button type="button" onclick="btLogin()">Masuk</button>
+        </fieldset>
+    </div>
+</body>
+<script src="./sistemtoserba.js"></script>
+
+</html>
