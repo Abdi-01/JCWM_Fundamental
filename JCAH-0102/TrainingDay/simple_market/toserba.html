@@ -4,6 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table,
+        td,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
     <title>Toserba | Semua Barang Ada</title>
 </head>
 
@@ -30,6 +38,35 @@
                 <input type="password" id="loginPass" placeholder="Masukkan Password" />
             </form>
             <button type="button" onclick="btLogin()">Masuk</button>
+        </fieldset>
+        <fieldset id="addProduct-page" style="width: 60vw;">
+            <legend>Tambah Produk</legend>
+            <form id="formProduk">
+                <input type="text" id="namaProduk" placeholder="Nama Produk" />
+                <input type="text" id="fotoProduk" placeholder="Link Foto" />
+                <input type="text" id="deskProduk" placeholder="Deskripsi" />
+                <input type="number" style="width: 15%;" id="stockProduk" placeholder="Stock Produk" />
+                <input type="number" style="width: 15%;" id="hargaProduk" placeholder="Harga Produk" />
+                <button type="button" onclick="btTambahProduk()">Tambah Produk</button>
+            </form>
+        </fieldset>
+        <fieldset style="width: 70vw;">
+            <legend>List Produk</legend>
+            <input type="text" id="cariProduk" placeholder="Cari Nama Produk" /><button type="button" onclick="btCariProduk()">Cari</button>
+            <table>
+                <thead>
+                    <th style="padding: 5px;">No</th>
+                    <th style="padding: 5px;width: 150px;">Foto Produk</th>
+                    <th style="padding: 5px;">Nama Produk</th>
+                    <th style="padding: 5px;width: 200px;">Deskripsi</th>
+                    <th style="padding: 5px;">Stock</th>
+                    <th style="padding: 5px; width: 100px;">Harga</th>
+                    <th style="padding: 5px;width: 100px;">Action</th>
+                </thead>
+                <tbody id="listProduk">
+
+                </tbody>
+            </table>
         </fieldset>
     </div>
 </body>

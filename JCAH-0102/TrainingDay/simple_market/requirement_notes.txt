@@ -8,9 +8,10 @@ Requirement User :
 
 Requirement Product :
 1. Menambah Product
-2. Menghapus Product
-3. Mengedit Product
-4. Melihat Product
+2. Melihat Product
+3. Menghapus Product
+4. Mengedit Product
+5. Data : nama produk, deskripsi, foto, price, stock
 
 Requirement Transaksi :
 1. User Beli, tambah ke cart/keranjang
