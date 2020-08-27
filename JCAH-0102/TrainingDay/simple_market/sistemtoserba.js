@@ -17,6 +17,7 @@ let dbUser = [
 //Menyimpan data produk
 let dbProduk = [
     {
+        idProduk: 1,
         namaProduk: "Good Time",
         foto: "http://arnotts.co.id/images/image-goodtime/good_time_1550214863.png",
         deskripsi: "Biskuit nikmat diwaktu yang tepat",
@@ -24,6 +25,7 @@ let dbProduk = [
         harga: 6500
     },
     {
+        idProduk: 2,
         namaProduk: "Oreo",
         foto: "https://static.republika.co.id/uploads/images/inpicture_slide/oreo-supreme-tidak-dijual-secara-resmi-di_200514190509-631.png",
         deskripsi: "Oreo bikin jadi SULTAN",
@@ -32,12 +34,14 @@ let dbProduk = [
     }
 ]
 
+let dbKeranjang = []
+
 //Menyembunyikan tampilan menu
 document.getElementById("regis-page").style.display = "none"
 document.getElementById("login-page").style.display = "none"
 
 //penampung index user yg login
-let userLogin = null
+let userLogin = 1
 
 //Blue print object data user
 class DB_User {
@@ -50,12 +54,24 @@ class DB_User {
 }
 
 class DB_Produk {
-    constructor(_namaProduk, _foto, _deskripsi, _stock, _harga) {
+    constructor(_idProduk, _namaProduk, _foto, _deskripsi, _stock, _harga) {
+        this.idProduk = _idProduk;
         this.namaProduk = _namaProduk;
         this.foto = _foto;
         this.deskripsi = _deskripsi;
         this.stock = _stock;
         this.harga = _harga;
+    }
+}
+
+class DB_Keranjang {
+    constructor(_id, _namaProduk, _foto, _qty, _price) {
+        this.id = _id;
+        this.namaProduk = _namaProduk;
+        this.foto = _foto;
+        this.qty = _qty;
+        this.price = _price;
+        this.priceTotal = _price * _qty
     }
 }
 
@@ -132,7 +148,8 @@ btTambahProduk = () => {
     if (formProduk.elements[0].value == '' || formProduk.elements[1].value == '' || formProduk.elements[2].value == '' || formProduk.elements[3].value == '' || formProduk.elements[4].value == '') {
         alert("Isi semua form")
     } else {
-        dbProduk.push(new DB_Produk(formProduk[0].value, formProduk[1].value, formProduk[2].value, parseInt(formProduk[3].value), parseInt(formProduk[4].value)))
+        //membuat id produk dari panjang/length dbProduk + 1
+        dbProduk.push(new DB_Produk(dbProduk.length + 1, formProduk[0].value, formProduk[1].value, formProduk[2].value, parseInt(formProduk[3].value), parseInt(formProduk[4].value)))
         printProduk()
         console.table(dbProduk)
     }
@@ -144,28 +161,36 @@ printProduk = (idx, dataProduk = dbProduk) => {
         if (idx == index) {
             tableElement += `
             <tr>
-                <td>${index + 1}</td>
-                <td><input type="text" id="fotoBaru" placeholder="Foto Produk Baru" value="${item.foto}"/></td>
-                <td><input type="text" id="namaBaru" placeholder="Nama Produk Baru" value="${item.namaProduk}"/></td>
-                <td><input type="text" id="deskripsiBaru" placeholder="Deskripsi Baru" value="${item.deskripsi}"/></td>
-                <td><input type="number" id="stockBaru" placeholder="Stock Baru" value="${item.stock}"/></td>
-                <td><input type="number" id="hargaBaru" placeholder="Nama Produk Baru" value="${item.harga}"/></td>
-                <td><button type="button" onclick="btSimpan(${index})">Simpan</button><button type="button" onclick="printProduk()">Batal</button></td>
+            <td>${index + 1}</td>
+            <td><input type="text" id="fotoBaru" placeholder="Foto Produk Baru" value="${item.foto}"/></td>
+            <td><input type="text" id="namaBaru" placeholder="Nama Produk Baru" value="${item.namaProduk}"/></td>
+            <td><input type="text" id="deskripsiBaru" placeholder="Deskripsi Baru" value="${item.deskripsi}"/></td>
+            <td><input type="number" id="stockBaru" placeholder="Stock Baru" value="${item.stock}"/></td>
+            <td><input type="number" id="hargaBaru" placeholder="Nama Produk Baru" value="${item.harga}"/></td>
+            <td><button type="button" onclick="btSimpan(${index})">Simpan</button><button type="button" onclick="printProduk()">Batal</button></td>
             </tr>    `
         } else {
             tableElement += `
             <tr>
-                <td>${index + 1}</td>
-                <td><img src="${item.foto}" width="120px" alt="foto_produk"/></td>
-                <td>${item.namaProduk}</td>
-                <td>${item.deskripsi}</td>
-                <td>${item.stock}</td>
-                <td>Rp. ${item.harga.toLocaleString()}</td>
-                <td><button type="button" onclick="btEditProduk(${index})">Edit 🔧</button><button type="button" >Hapus 🗑</button></td>
+            <td>${index + 1}</td>
+            <td><img src="${item.foto}" width="120px" alt="foto_produk"/></td>
+            <td>${item.namaProduk}</td>
+            <td>${item.deskripsi}</td>
+            <td>${item.stock}</td>
+            <td>Rp. ${item.harga.toLocaleString()}</td>
+            <td>
+            ${
+                dbUser[userLogin].role == "user" ?
+                    `<button type="button" onclick="btAddToCart(${index})">Add to cart 🛒</button>`
+                    :
+                    `<button type="button" onclick="btEditProduk(${index})">Edit 🔧</button><button type="button" >Hapus 🗑</button>`
+                }
+            </td>
             </tr>`
         }
     })
 
+    console.table(dbProduk)
     document.getElementById("listProduk").innerHTML = tableElement
 }
 
@@ -196,4 +221,97 @@ btCariProduk = () => {
     })
     // console.log(pencarian)
     printProduk(null, pencarian)
+}
+
+btCariStock = () => {
+    let minStock = parseInt(document.getElementById("minStock").value)
+    let maxStock = parseInt(document.getElementById("maxStock").value)
+    let cariStock = dbProduk.filter((item, index) => {
+        return item.stock >= minStock && item.stock <= maxStock
+    })
+
+    printProduk(null, cariStock)
+}
+
+btCariHarga = () => {
+    let minHarga = parseInt(document.getElementById("minHarga").value)
+    let maxHarga = parseInt(document.getElementById("maxHarga").value)
+    let cariHarga = dbProduk.filter((item, index) => {
+        return item.harga >= minHarga && item.harga <= maxHarga
+    })
+
+    printProduk(null, cariHarga)
+}
+
+btSortData = () => {
+    let sortParam = document.getElementById("sortData").value
+    let printSort = dbProduk.sort((a, b) => {
+        if (sortParam == "namaAsc") {
+            if (a.namaProduk < b.namaProduk) { return -1 }
+            if (a.namaProduk > b.namaProduk) { return 1 }
+            return 0
+        } else if (sortParam == "hargaAsc" || sortParam == "hargaDsc") {
+            return sortParam == "hargaAsc" ? a.harga - b.harga : b.harga - a.harga
+        } else if (sortParam == "stockAsc" || sortParam == "stockDsc") {
+            return sortParam == "stockAsc" ? a.stock - b.stock : b.stock - a.stock
+        }
+    })
+
+    printProduk(null, printSort)
+}
+
+/////////////////////////REQUIREMENT TRANSACTION////////////////////////////////
+btAddToCart = (idx) => {
+    let getQty = parseInt(prompt("Masukkan Qty : "))
+    dbProduk[idx].stock -= getQty
+    dbKeranjang.push(new DB_Keranjang(dbProduk[idx].idProduk, dbProduk[idx].namaProduk, dbProduk[idx].foto, getQty, dbProduk[idx].harga))
+    console.table(dbKeranjang)
+    printProduk()
+    printKeranjang()
+}
+
+printKeranjang = () => {
+    let tbElementCart = ""
+    dbKeranjang.forEach((item, index) => {
+        tbElementCart += `
+        <tr>
+            <td>${index + 1}</td>
+            <td><img src="${item.foto}" width="120px"/></td>
+            <td>${item.namaProduk}</td>
+            <td>${item.qty}</td>
+            <td>${item.price}</td>
+            <td>${item.priceTotal}</td>
+            <td><button type="button" onclick="btEditQty(${index})"> Edit Qty</button>
+            <button type="button" onclick="btHapusKeranjang(${index})"> Hapus</button></td>
+        </tr>
+        `
+    })
+
+    document.getElementById("listKeranjang").innerHTML = tbElementCart
+}
+
+btHapusKeranjang = (i) => {
+    //Mengambil index produk berdasarkan findIndex dari perbandingan uniqueKEY id produk 2 database
+    let ind = dbProduk.findIndex((item) => item.idProduk == dbKeranjang[i].id)
+    // console.log(ind)
+
+    dbProduk[ind].stock += dbKeranjang[i].qty
+    dbKeranjang.splice(i, 1)
+    printProduk()
+    printKeranjang()
+}
+
+btEditQty = (idx) => {
+    //Mengambil index product
+    let ind = dbProduk.findIndex((item) => item.idProduk == dbKeranjang[idx].id)
+    //mengembalikan stock produk
+    dbProduk[ind].stock += dbKeranjang[idx].qty
+    // menginputkan qty yang baru
+    let editQty = parseInt(prompt("Masukkan Qty Baru : ", dbKeranjang[idx].qty))
+    //menyimpan qty keranjang yang baru
+    dbKeranjang[idx].qty = editQty
+    //mengurangi bagian stock produk
+    dbProduk[ind].stock -= editQty
+    printProduk()
+    printKeranjang()
 }

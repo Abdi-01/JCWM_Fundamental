@@ -16,3 +16,4 @@ Requirement Product :
 Requirement Transaksi :
 1. User Beli, tambah ke cart/keranjang
 2. User Bayar
+3. Data : nama produk, foto, qty, price, price total

@@ -50,9 +50,23 @@
                 <button type="button" onclick="btTambahProduk()">Tambah Produk</button>
             </form>
         </fieldset>
-        <fieldset style="width: 70vw;">
+        <fieldset id="produk-page" style="width: 65vw;">
             <legend>List Produk</legend>
-            <input type="text" id="cariProduk" placeholder="Cari Nama Produk" /><button type="button" onclick="btCariProduk()">Cari</button>
+            <input type="text" id="cariProduk" placeholder="Cari Nama Produk" /><button type="button"
+                onclick="btCariProduk()">Cari</button>
+            <input type="number" id="minStock" placeholder="Min. Stock" style="width: 80px;" />
+            <input type="number" id="maxStock" placeholder="Max. Stock" style="width: 80px;" />
+            <button type="button" onclick="btCariStock()">Cari Stock</button>
+            <input type="number" id="minHarga" placeholder="Min. Harga" style="width: 80px;" />
+            <input type="number" id="maxHarga" placeholder="Max. Harga" style="width: 80px;" />
+            <button type="button" onclick="btCariHarga()">Cari Harga</button>
+            <select id="sortData" onclick="btSortData()">
+                <option value="namaAsc">Nama</option>
+                <option value="hargaAsc">Harga Terendah</option>
+                <option value="hargaDsc">Harga Tertinggi</option>
+                <option value="stockAsc">Stock Terendah</option>
+                <option value="stockDsc">Stock Tertinggi</option>
+            </select>
             <table>
                 <thead>
                     <th style="padding: 5px;">No</th>
@@ -64,6 +78,23 @@
                     <th style="padding: 5px;width: 100px;">Action</th>
                 </thead>
                 <tbody id="listProduk">
+
+                </tbody>
+            </table>
+        </fieldset>
+        <fieldset id="cart-page" style="width: 65vw;">
+            <legend>Keranjang Belanja</legend>
+            <table>
+                <thead>
+                    <th>No</th>
+                    <th>Foto Produk</th>
+                    <th>Nama Produk</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Price Total</th>
+                    <th>Action</th>
+                </thead>
+                <tbody id="listKeranjang">
 
                 </tbody>
             </table>
