@@ -149,12 +149,14 @@ btLogin = () => {
                 document.getElementById("produk-page").style.display = "block"
                 document.getElementById("cart-page").style.display = "none"
                 printProduk()
+                printKeranjang()
             } else if (dbUser[userLogin].role == "user") {
                 alert("Kamu User")
                 document.getElementById("addProduct-page").style.display = "none"
                 document.getElementById("produk-page").style.display = "block"
                 document.getElementById("cart-page").style.display = "block"
                 printProduk()
+                printKeranjang()
             }
         } else {
             alert("Maaf Akun Anda Belum Terdaftar 🙅‍♂️")
@@ -221,7 +223,7 @@ printProduk = (idx, dataProduk = dbProduk) => {
         }
     })
 
-    console.table(dbProduk)
+    // console.table(dbProduk)
     document.getElementById("listProduk").innerHTML = tableElement
 }
 
@@ -295,8 +297,8 @@ btSortData = () => {
 btAddToCart = (idx) => {
     let getQty = parseInt(prompt("Masukkan Qty : "))
     dbProduk[idx].stock -= getQty
-    dbKeranjang.push(new DB_Keranjang(dbProduk[idx].idProduk, dbProduk[idx].namaProduk, dbProduk[idx].foto, getQty, dbProduk[idx].harga))
-    console.table(dbKeranjang)
+    dbUser[userLogin].keranjang.push(new DB_Keranjang(dbProduk[idx].idProduk, dbProduk[idx].namaProduk, dbProduk[idx].foto, getQty, dbProduk[idx].harga))
+    console.table("Keranjang useer :", dbUser[userLogin].keranjang)
     printProduk()
     printKeranjang()
 }
@@ -304,7 +306,7 @@ btAddToCart = (idx) => {
 printKeranjang = () => {
     let tbElementCart = ""
     totalPayment = 0
-    dbKeranjang.forEach((item, index) => {
+    dbUser[userLogin].keranjang.forEach((item, index) => {
         tbElementCart += `
         <tr>
             <td>${index + 1}</td>
@@ -326,26 +328,26 @@ printKeranjang = () => {
 
 btHapusKeranjang = (i) => {
     //Mengambil index produk berdasarkan findIndex dari perbandingan uniqueKEY id produk 2 database
-    let ind = dbProduk.findIndex((item) => item.idProduk == dbKeranjang[i].id)
+    let ind = dbProduk.findIndex((item) => item.idProduk == dbUser[userLogin].keranjang[i].id)
     // console.log(ind)
 
-    dbProduk[ind].stock += dbKeranjang[i].qty
-    dbKeranjang.splice(i, 1)
+    dbProduk[ind].stock += dbUser[userLogin].keranjang[i].qty
+    dbUser[userLogin].keranjang.splice(i, 1)
     printProduk()
     printKeranjang()
 }
 
 btEditQty = (idx) => {
     //Mengambil index product
-    let ind = dbProduk.findIndex((item) => item.idProduk == dbKeranjang[idx].id)
+    let ind = dbProduk.findIndex((item) => item.idProduk == dbUser[userLogin].keranjang[idx].id)
     //mengembalikan stock produk
-    dbProduk[ind].stock += dbKeranjang[idx].qty
+    dbProduk[ind].stock += dbUser[userLogin].keranjang[idx].qty
     // menginputkan qty yang baru
-    let editQty = parseInt(prompt("Masukkan Qty Baru : ", dbKeranjang[idx].qty))
+    let editQty = parseInt(prompt("Masukkan Qty Baru : ", dbUser[userLogin].keranjang[idx].qty))
     //menyimpan qty keranjang yang baru
-    dbKeranjang[idx].qty = editQty
+    dbUser[userLogin].keranjang[idx].qty = editQty
     //merubah total harga
-    dbKeranjang[idx].priceTotal = dbKeranjang[idx].price * editQty
+    dbUser[userLogin].keranjang[idx].priceTotal = dbUser[userLogin].keranjang[idx].price * editQty
     //mengurangi bagian stock produk
     dbProduk[ind].stock -= editQty
     printProduk()

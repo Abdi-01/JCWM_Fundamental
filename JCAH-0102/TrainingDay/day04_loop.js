@@ -85,19 +85,19 @@ Looping : perulangan
 // }
 // console.log(symD)
 // //Triangle-2
-console.log("\nTriangle-2")
-var symD = ""
-let count = 1
-for (let i = 1; i <= 5; i++) {
-    for (let j = 0; j < i; j++) {
-        symD += `${count} `
-        count++
-    }
-    if (i < 5) {
-        symD += "\n"
-    }
-}
-console.log(symD)
+// console.log("\nTriangle-2")
+// var symD = ""
+// let count = 1
+// for (let i = 1; i <= 5; i++) {
+//     for (let j = 0; j < i; j++) {
+//         symD += `${count} `
+//         count++
+//     }
+//     if (i < 5) {
+//         symD += "\n"
+//     }
+// }
+// console.log(symD)
 // //Triangle-3
 // console.log("\nTriangle-3")
 // var symD = ""
@@ -238,3 +238,19 @@ console.log(symD)
 //     str += "\n"
 // }
 // console.log(str)
+
+var symD = ""
+let count = 5
+for (let i = 1; i <= 5; i++) {
+    symD += `${count} `
+    let c2 = count
+    for (let j = 1; j < i; j++) {
+        c2++
+        symD += `${c2 } `
+    }
+    count--
+    if (i < 5) {
+        symD += "\n"
+    }
+}
+console.log(symD)
