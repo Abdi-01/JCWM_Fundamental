@@ -37,7 +37,8 @@
                 <input type="text" id="loginName" placeholder="Masukkan Nama" />
                 <input type="password" id="loginPass" placeholder="Masukkan Password" />
             </form>
-            <button type="button" onclick="btLogin()">Masuk</button>
+            <button type="button" id="btMasuk" onclick="btLogin()">Masuk</button>
+            <button type="button" id="btKeluar" onclick="btKeluar()">Keluar</button>
         </fieldset>
         <fieldset id="addProduct-page" style="width: 60vw;">
             <legend>Tambah Produk</legend>
@@ -52,8 +53,8 @@
         </fieldset>
         <fieldset id="produk-page" style="width: 65vw;">
             <legend>List Produk</legend>
-            <input type="text" id="cariProduk" placeholder="Cari Nama Produk" /><button type="button"
-                onclick="btCariProduk()">Cari</button>
+            <input type="text" id="cariProduk" onchange="btCariProduk()" placeholder="Cari Nama Produk" />
+            <button type="button" onclick="btCariProduk()">Cari</button>
             <input type="number" id="minStock" placeholder="Min. Stock" style="width: 80px;" />
             <input type="number" id="maxStock" placeholder="Max. Stock" style="width: 80px;" />
             <button type="button" onclick="btCariStock()">Cari Stock</button>
@@ -84,20 +85,24 @@
         </fieldset>
         <fieldset id="cart-page" style="width: 65vw;">
             <legend>Keranjang Belanja</legend>
-            <table>
-                <thead>
-                    <th>No</th>
-                    <th>Foto Produk</th>
-                    <th>Nama Produk</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Price Total</th>
-                    <th>Action</th>
-                </thead>
-                <tbody id="listKeranjang">
+            <div style="display: flex;">
+                <table>
+                    <thead>
+                        <th>No</th>
+                        <th>Foto Produk</th>
+                        <th>Nama Produk</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Price Total</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody id="listKeranjang">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+                <h4 id="payment" style="margin-top: 0;margin-left: 10px;">Payment : </h4>
+                <button type="button" style="height: 21px;" onclick="btPayment()">Bayar</button>
+            </div>
         </fieldset>
     </div>
 </body>

@@ -4,13 +4,15 @@ let dbUser = [
         username: "Admin",
         email: "admin@mail.com",
         password: "admin",
-        role: "admin"
+        role: "admin",
+        keranjang: []
     },
     {
         username: "Aldo",
         email: "aldo@mail.com",
         password: "aldo",
-        role: "user"
+        role: "user",
+        keranjang: []
     }
 ]
 
@@ -39,9 +41,18 @@ let dbKeranjang = []
 //Menyembunyikan tampilan menu
 document.getElementById("regis-page").style.display = "none"
 document.getElementById("login-page").style.display = "none"
+document.getElementById("addProduct-page").style.display = "none"
+document.getElementById("produk-page").style.display = "none"
+document.getElementById("cart-page").style.display = "none"
 
 //penampung index user yg login
-let userLogin = 1
+let userLogin = null
+
+//Penampung total payment
+let totalPayment
+
+//kofigurasi button keluar
+document.getElementById("btKeluar").disabled = true
 
 //Blue print object data user
 class DB_User {
@@ -50,6 +61,7 @@ class DB_User {
         this.email = _email;
         this.password = _password;
         this.role = "user";
+        this.keranjang = []
     }
 }
 
@@ -126,13 +138,23 @@ btLogin = () => {
                 userLogin = index
                 console.log(index)
                 alert(`Selamat Datang ${item.username} 😃`)
+                document.getElementById("btKeluar").disabled = false
+                document.getElementById("btMasuk").disabled = true
             }
         })
         if (userLogin != null) {
             if (dbUser[userLogin].role == "admin") {
                 alert("Kamu Admin")
+                document.getElementById("addProduct-page").style.display = "block"
+                document.getElementById("produk-page").style.display = "block"
+                document.getElementById("cart-page").style.display = "none"
+                printProduk()
             } else if (dbUser[userLogin].role == "user") {
                 alert("Kamu User")
+                document.getElementById("addProduct-page").style.display = "none"
+                document.getElementById("produk-page").style.display = "block"
+                document.getElementById("cart-page").style.display = "block"
+                printProduk()
             }
         } else {
             alert("Maaf Akun Anda Belum Terdaftar 🙅‍♂️")
@@ -140,6 +162,15 @@ btLogin = () => {
     } else {
         alert("Tolong isi semua form yang ada")
     }
+}
+
+btKeluar = () => {
+    userLogin = null
+    document.getElementById("btKeluar").disabled = true
+    document.getElementById("btMasuk").disabled = false
+    document.getElementById("addProduct-page").style.display = "none"
+    document.getElementById("produk-page").style.display = "none"
+    document.getElementById("cart-page").style.display = "none"
 }
 
 //////////////////////////REQUIREMENT PRODUK////////////////////////////////
@@ -194,7 +225,7 @@ printProduk = (idx, dataProduk = dbProduk) => {
     document.getElementById("listProduk").innerHTML = tableElement
 }
 
-printProduk()
+
 
 btDeleteProduk = idx => {
     dbProduk.splice(idx, 1)
@@ -219,7 +250,7 @@ btCariProduk = () => {
     let pencarian = dbProduk.filter((item, index) => {
         return item.namaProduk.toLowerCase().includes(document.getElementById("cariProduk").value.toLowerCase())
     })
-    // console.log(pencarian)
+    console.log(pencarian)
     printProduk(null, pencarian)
 }
 
@@ -272,6 +303,7 @@ btAddToCart = (idx) => {
 
 printKeranjang = () => {
     let tbElementCart = ""
+    totalPayment = 0
     dbKeranjang.forEach((item, index) => {
         tbElementCart += `
         <tr>
@@ -285,8 +317,10 @@ printKeranjang = () => {
             <button type="button" onclick="btHapusKeranjang(${index})"> Hapus</button></td>
         </tr>
         `
+        totalPayment += item.priceTotal
     })
 
+    document.getElementById("payment").innerHTML = `Payment : Rp. ${totalPayment.toLocaleString()}`
     document.getElementById("listKeranjang").innerHTML = tbElementCart
 }
 
@@ -310,8 +344,25 @@ btEditQty = (idx) => {
     let editQty = parseInt(prompt("Masukkan Qty Baru : ", dbKeranjang[idx].qty))
     //menyimpan qty keranjang yang baru
     dbKeranjang[idx].qty = editQty
+    //merubah total harga
+    dbKeranjang[idx].priceTotal = dbKeranjang[idx].price * editQty
     //mengurangi bagian stock produk
     dbProduk[ind].stock -= editQty
     printProduk()
     printKeranjang()
+}
+
+btPayment = () => {
+    while (true) {
+        let bayar = parseInt(prompt("Masukkan Uang Anda 💸💸💸: ")) - totalPayment
+        if (bayar < 0) {
+            alert("Uang pembayaran anda kurang ")
+        } else {
+            alert("Terima kasih sudah berbelanja ☺\n Kembalian anda : Rp. " + bayar.toLocaleString())
+            dbKeranjang = []
+            totalPayment = 0
+            printKeranjang()
+            break;
+        }
+    }
 }
