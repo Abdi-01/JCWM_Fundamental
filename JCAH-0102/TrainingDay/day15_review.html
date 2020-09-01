@@ -1,0 +1,19 @@
+<script>
+    // prompt digunakan utk menampung setiap input dari pop_up browser
+    // type data defaultnya adalah string
+    let inputCekA = prompt("Masukkan Huruf Pertama ?").split('plus')
+    // let inputCekB = prompt("Masukkan Huruf Kedua?").charCodeAt(0) - 96
+
+    console.log(inputCekA)
+    // console.log(inputCekB)
+    // console.log(prompt("Apa kabar ?", "Baik"))
+    //cara 1
+    // alert(isNaN(inputCek) ? "String" : "Number")
+    //cara 2
+    // console.log(Boolean(parseInt(inputCek)))\
+    let count = 0
+    for (let i = 0; i < inputCekA.length; i++) {
+        count += parseInt(inputCekA[i])
+    }
+    alert(count) //ternary operator
+</script>

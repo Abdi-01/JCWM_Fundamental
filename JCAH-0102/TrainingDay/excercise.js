@@ -131,26 +131,52 @@
 
 //Test find user
 
-let dbUser = [
-    {
-        username: "Admin",
-        password: '123',
-        role: 'admin'
-    },
-    {
-        username: "Budi",
-        password: '321',
-        role: 'user'
-    },
-    {
-        username: "Andi",
-        password: '456',
-        role: 'user'
+// let dbUser = [
+//     {
+//         username: "Admin",
+//         password: '123',
+//         role: 'admin'
+//     },
+//     {
+//         username: "Budi",
+//         password: '321',
+//         role: 'user'
+//     },
+//     {
+//         username: "Andi",
+//         password: '456',
+//         role: 'user'
+//     }
+// ]
+
+
+// //mencari index dari array
+// let cari = dbUser.findIndex((item) => item.password == "123a")
+
+// console.log(cari)
+/////////////////////////////////bilangan prima////////////////////
+var number = 2
+do {
+    var count = 0
+    for (let i = 2; i <= number; i++) {
+        // jika number % i = 0, maka
+        if (number % i == 0) {
+            count++ //menghitung ada berapa bilangan i yg jika dimodulus dengan number hasilnya 0
+        }
+        // console.log("number", number, "i = ", i, "modulus", number % i, "hasil", count)
     }
-]
+    if (count == 1) {
+        console.log(number, "Bilangan prima")
+    }
+    number++
+} while (number <= 20);
 
-
-//mencari index dari array
-let cari = dbUser.findIndex((item) => item.password == "123a")
-
-console.log(cari)
+// let day = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+// let bulan = 8
+// let tahun = 2020
+// let date = new Date(tahun, bulan - 1,1)
+// console.log(date)
+// let startDay = date.getDay()
+// console.log(startDay)
+// let totalDays = new Date(tahun, bulan, 0).getDate()
+// console.log(totalDays)
