@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="size" type="number" />
+    <button type="button" onclick="btGenerate(1)">Tampilan 1</button>
+    <button type="button" onclick="btGenerate(2)">Tampilan 2</button>
+    <div id="tampilan">
+
+    </div>
+</body>
+<script>
+    btGenerate = (tmp) => {
+        let size = document.getElementById('size').value
+        let i, j, k, elmnt = '';
+        if (tmp == 1) {
+            for (i = 0; i < size; i++) {
+                for (j = 0; j <= i; j++) {
+                    elmnt += '* '
+                }
+                elmnt += '<br>'
+            }
+        } else if (tmp == 2) {
+            for (i = 0; i < size; i++) {
+                for (j = 0; j <= i; j++) {
+                    elmnt += '# '
+                }
+                elmnt += '<br>'
+            }
+        }
+
+        document.getElementById("tampilan").innerHTML = elmnt
+    }
+</script>
+
+</html>
